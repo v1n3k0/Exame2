@@ -7,9 +7,29 @@ namespace Exame.DAO
     public class SqlCliente
     {
 
-        private readonly string connectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
+        private readonly string connectionString = ConfigurationManager.ConnectionStrings["ExameConnetionString"].ConnectionString;
 
-        public SqlDataReader executar(SqlCommand comando)
+        public SqlDataReader executarReader(string queryString)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                SqlDataReader reader = null;
+                try
+                {
+                    connection.Open();
+                    reader = command.ExecuteReader();
+                }
+                catch (Exception ex)
+                {
+                    
+                }
+
+                return reader;
+            }
+        }
+
+        public SqlDataReader executarNonQuery(SqlCommand comando)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -17,12 +37,11 @@ namespace Exame.DAO
                 try
                 {
                     connection.Open();
-                    reader = comando.ExecuteReader();
-                    reader.Close();
+                    comando.ExecuteNonQuery();;
                 }
                 catch (Exception ex)
                 {
-                    
+
                 }
 
                 return reader;
