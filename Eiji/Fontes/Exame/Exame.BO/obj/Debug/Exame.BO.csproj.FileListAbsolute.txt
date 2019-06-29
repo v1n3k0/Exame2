@@ -1,0 +1,11 @@
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.BO\bin\Debug\Exame.BO.dll
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.BO\bin\Debug\Exame.BO.pdb
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.BO\bin\Debug\Exame.DAO.dll
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.BO\bin\Debug\Exame.VO.dll
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.BO\bin\Debug\Exame.DAO.pdb
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.BO\bin\Debug\Exame.VO.pdb
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.BO\obj\Debug\Exame.BO.csprojAssemblyReference.cache
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.BO\obj\Debug\Exame.BO.csproj.CoreCompileInputs.cache
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.BO\obj\Debug\Exame.BO.csproj.CopyComplete
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.BO\obj\Debug\Exame.BO.dll
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.BO\obj\Debug\Exame.BO.pdb

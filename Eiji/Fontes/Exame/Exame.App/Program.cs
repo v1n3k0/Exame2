@@ -24,7 +24,7 @@ namespace Exame.App
 
             var repositorioCosif = new CosifRepositorio();
 
-            IEnumerable<Cosif> cosifs = repositorioCosif.ListarPorProduto(1);
+            IEnumerable<Cosif> cosifs = repositorioCosif.ListarPorStatusPorProduto("A", 1);
 
             Console.WriteLine("Codigo\tCodProd\tClass\tStatus");
 

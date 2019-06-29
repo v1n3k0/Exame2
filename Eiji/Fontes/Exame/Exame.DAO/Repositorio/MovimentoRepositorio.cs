@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace Exame.DAO.Repositorio
 {
-    class MovimentoRepositorio
+    public class MovimentoRepositorio
     {
         private const string TABELA = "MOVIMENTO_MANUAL";
         private const string MES = "DAT_MES";

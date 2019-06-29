@@ -54,10 +54,6 @@
       <Project>{3ee14135-969c-4b9d-a8d6-36529df43711}</Project>
       <Name>Exame.VO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Exame.Web\Exame.Web.csproj">
-      <Project>{965b9b9f-c3e9-4a16-a358-7dbe341a59d5}</Project>
-      <Name>Exame.Web</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

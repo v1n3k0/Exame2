@@ -81,3 +81,9 @@ D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.Web\obj\Debug\Exame.Web.csproj.CoreC
 D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.Web\obj\Debug\Exame.Web.csproj.CopyComplete
 D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.Web\obj\Debug\Exame.Web.dll
 D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.Web\obj\Debug\Exame.Web.pdb
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.Web\bin\Exame.BO.dll
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.Web\bin\Exame.VO.dll
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.Web\bin\Exame.DAO.dll
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.Web\bin\Exame.BO.pdb
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.Web\bin\Exame.VO.pdb
+D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.Web\bin\Exame.DAO.pdb

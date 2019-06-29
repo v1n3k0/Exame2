@@ -17,17 +17,18 @@ namespace Exame.DAO.Repositorio
 
         private readonly string _connectionString = ConfigurationManager.ConnectionStrings["ExameConnetionString"].ConnectionString;
 
-        public IEnumerable<Cosif> ListarPorProduto(int codigoProduto)
+        public IEnumerable<Cosif> ListarPorStatusPorProduto(string status, int codigoProduto)
         {
             string queryString = $"SELECT {CODIGO},{CODIGOPRODUTO},{CLASSIFICACAO},{STATUS} " +
                 $"from {TABELA} " +
-                $"WHERE {CODIGOPRODUTO} = @codigoProduto";
+                $"WHERE {STATUS} like @status AND {CODIGOPRODUTO} = @codigoProduto";
 
             var cosifs = new List<Cosif>();
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@status", status);
                 command.Parameters.AddWithValue("@codigoProduto", codigoProduto);
 
                 try

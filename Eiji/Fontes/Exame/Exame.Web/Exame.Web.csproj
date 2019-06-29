@@ -121,9 +121,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MovimentoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CosifView.cs" />
+    <Compile Include="Models\MovimentoProdutoView.cs" />
+    <Compile Include="Models\MovimentoView.cs" />
+    <Compile Include="Models\ProdutoView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -162,10 +167,11 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Movimento\Index.cshtml" />
+    <Content Include="Views\Movimento\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -179,6 +185,16 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Exame.BO\Exame.BO.csproj">
+      <Project>{88d2d97f-4074-4866-b9d3-2e0fd21a8a92}</Project>
+      <Name>Exame.BO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Exame.VO\Exame.VO.csproj">
+      <Project>{3ee14135-969c-4b9d-a8d6-36529df43711}</Project>
+      <Name>Exame.VO</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
