@@ -11,13 +11,26 @@ namespace Exame.App
         {
             var repositorioProduto = new ProdutoRepositorio();
 
-            IEnumerable<Produto> produtos = repositorioProduto.listar();
+            IEnumerable<Produto> produtos = repositorioProduto.ListarPorStatus("A");
 
-            Console.WriteLine("\tCodigo\tDescricao\tStatus");
+            Console.WriteLine("Codigo\tDescricao\tStatus");
 
             foreach (var produto in produtos)
             {
-                Console.WriteLine("\t{0}\t{1}\t{2}",produto.codigo, produto.descricao, produto.status);
+                Console.WriteLine("{0}\t{1}\t{2}",produto.Codigo, produto.Descricao, produto.Status);
+            }
+
+            Console.WriteLine("\n");
+
+            var repositorioCosif = new CosifRepositorio();
+
+            IEnumerable<Cosif> cosifs = repositorioCosif.ListarPorProduto(1);
+
+            Console.WriteLine("Codigo\tCodProd\tClass\tStatus");
+
+            foreach (var cosif in cosifs)
+            {
+                Console.WriteLine("{0}\t{1}\t{2}\t{3}", cosif.Codigo, cosif.CodigoProduto, cosif.Classificacao, cosif.Status);
             }
 
             Console.ReadLine();

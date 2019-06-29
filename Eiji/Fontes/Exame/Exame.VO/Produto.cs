@@ -2,8 +2,8 @@
 {
     public class Produto
     {
-        public int codigo { get; set; }
-        public string descricao { get; set; }
-        public string status { get; set; }
+        public int Codigo { get; set; }
+        public string Descricao { get; set; }
+        public string Status { get; set; }
     }
 }
