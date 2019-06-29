@@ -41,9 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Cosif.cs" />
-    <Compile Include="Movimento.cs" />
-    <Compile Include="Produto.cs" />
+    <Compile Include="Entidade\Cosif.cs" />
+    <Compile Include="Entidade\Movimento.cs" />
+    <Compile Include="Entidade\Procedure\MovimentoProduto.cs" />
+    <Compile Include="Entidade\Produto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
