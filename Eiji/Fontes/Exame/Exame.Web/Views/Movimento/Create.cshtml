@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
+<h2>Criar novo movimento</h2>
 
 
 @using (Html.BeginForm())
@@ -13,7 +13,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>MovimentoView</h4>
+        <h4>Movimento</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
@@ -66,14 +66,15 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Incluir" class="btn btn-default" />
+                <input type="button" value="Limpar" class="btn btn-default" id="limpar" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar para lista", "Index")
 </div>
 
 @section Scripts {
@@ -102,6 +103,13 @@
                     });
                 }
             });
+        });
+
+        $('#limpar').click(function () {
+            $('#Mes').val('');
+            $('#Ano').val('');
+            $('#Valor').val('');
+            $('#Descricao').val('');
         });
     </script>
 }

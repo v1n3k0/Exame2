@@ -13,5 +13,6 @@ namespace Exame.VO
         public string Descricao { get; set; }
         public DateTime DataMovimento { get; set; }
         public string CodigoUsuario { get; set; }
+
     }
 }

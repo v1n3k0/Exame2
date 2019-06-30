@@ -101,5 +101,34 @@ namespace Exame.DAO.Repositorio
             return movimentosProduto;
         }
 
+        public int GerarNumeroLancamento(int mes, int ano)
+        {
+            string queryString = "SELECT COUNT(NUM_LANCAMENTO) FROM MOVIMENTO_MANUAL WHERE DAT_MES = @mes AND DAT_ANO = @ano";
+
+            var numeroLancamento = 1;
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@mes", mes);
+                command.Parameters.AddWithValue("@ano", ano);
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    reader.Read();
+                    numeroLancamento = reader.GetInt32(0) + 1;
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(string.Concat("ERROR: ", ex.Message));
+                }
+            }
+
+            return numeroLancamento;
+        }
+
     }
 }

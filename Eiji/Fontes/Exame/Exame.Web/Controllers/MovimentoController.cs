@@ -41,8 +41,20 @@ namespace Exame.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(MovimentoView movimento)
+        public ActionResult Create(MovimentoView movimentoView)
         {
+            Movimento movimento = new Movimento()
+            {
+                Mes = movimentoView.Mes,
+                Ano = movimentoView.Ano,
+                CodigoCosif = movimentoView.CodigoCosif,
+                CodigoProduto = movimentoView.CodigoProduto,
+                CodigoUsuario = movimentoView.CodigoUsuario,
+                Descricao = movimentoView.Descricao,
+                Valor = movimentoView.Valor
+            };
+
+            _movimentoServico.Adicionar(movimento);
 
             return RedirectToAction("Index");
         }
@@ -53,7 +65,8 @@ namespace Exame.Web.Controllers
             IEnumerable<Cosif> cosifs = _cosifServico.ListarAtivoPorProduto(codigoProduto);
 
             var cosifsList = new SelectList(
-                cosifs.Select(x => new {
+                cosifs.Select(x => new
+                {
                     Codigo = x.Codigo,
                     Descricao = $"{x.Codigo} - ({x.Status})"
                 }),
