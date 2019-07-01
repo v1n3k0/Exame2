@@ -45,7 +45,6 @@
     <Compile Include="Repositorio\CosifRepositorio.cs" />
     <Compile Include="Repositorio\MovimentoRepositorio.cs" />
     <Compile Include="Repositorio\ProdutoRepositorio.cs" />
-    <Compile Include="SqlCliente.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

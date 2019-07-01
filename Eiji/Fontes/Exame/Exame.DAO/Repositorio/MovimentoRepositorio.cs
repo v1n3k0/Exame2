@@ -103,7 +103,7 @@ namespace Exame.DAO.Repositorio
 
         public int GerarNumeroLancamento(int mes, int ano)
         {
-            string queryString = "SELECT COUNT(NUM_LANCAMENTO) FROM MOVIMENTO_MANUAL WHERE DAT_MES = @mes AND DAT_ANO = @ano";
+            string queryString = "SELECT ISNULL(MAX(NUM_LANCAMENTO), 0) FROM MOVIMENTO_MANUAL WHERE DAT_MES = @mes AND DAT_ANO = @ano";
 
             var numeroLancamento = 1;
 
