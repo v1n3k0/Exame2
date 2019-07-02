@@ -84,25 +84,29 @@
         $('#CodigoProduto').change(function () {
             var produto = $('#CodigoProduto');
             var cosif = $('#CodigoCosif');
+            if (produto.val() != "") {
+                $.ajax({
+                    url: "@Url.Action("getCosifs","Movimento")",
+                    data: { "codigoProduto": produto.val() },
+                    dataType: "json",
+                    type: "GET",
+                    error: function () {
+                        alert("Ocorreu um erro");
+                        cosif.empty();
+                    },
+                    success: function (data) {
+                        cosif.empty();
 
-            $.ajax({
-                url: "@Url.Action("getCosifs","Movimento")",
-                data: {"codigoProduto": produto.val() },
-                dataType: "json",
-                type: "GET",
-                error: function () {
-                    alert("Ocorreu um erro");
-                    cosif.empty();
-                },
-                success: function (data) {
-                    cosif.empty();
-
-                    $.each(data, function (i) {
-                        var option = '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
-                        cosif.append(option);
-                    });
-                }
-            });
+                        $.each(data, function (i) {
+                            var option = '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
+                            cosif.append(option);
+                        });
+                    }
+                });
+            } else {
+                alert("Selecione um produto");
+                cosif.val("");
+            }
         });
 
         $('#limpar').click(function () {

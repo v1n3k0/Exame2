@@ -29,13 +29,8 @@ namespace Exame.Web.Controllers
         public ActionResult Create()
         {
             var movimento = new MovimentoView();
-            IEnumerable<Produto> produtos = _produtoServico.ListarAtivo();
-
-            ViewBag.Produtos = new SelectList(
-                produtos.OrderBy(x => x.Descricao),
-                "Codigo",
-                "Descricao"
-                );
+            
+            ListarProduto();
 
             return View(movimento);
         }
@@ -54,9 +49,16 @@ namespace Exame.Web.Controllers
                 Valor = movimentoView.Valor
             };
 
-            _movimentoServico.Adicionar(movimento);
+            bool resultado = _movimentoServico.Adicionar(movimento);
 
-            return RedirectToAction("Index");
+            if(resultado)
+                return RedirectToAction("Index");
+            else
+            {
+                ViewBag.Alerta = "Erro ao cadastrar movimento.";
+                ListarProduto();
+                return View(movimentoView);
+            }
         }
 
         [HttpGet]
@@ -75,6 +77,17 @@ namespace Exame.Web.Controllers
                 );
 
             return Json(cosifsList, JsonRequestBehavior.AllowGet);
+        }
+
+        private void ListarProduto()
+        {
+            IEnumerable<Produto> produtos = _produtoServico.ListarAtivo();
+
+            ViewBag.Produtos = new SelectList(
+                produtos.OrderBy(x => x.Descricao),
+                "Codigo",
+                "Descricao"
+                );
         }
     }
 }

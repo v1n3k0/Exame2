@@ -27,6 +27,12 @@
         </div>
     </div>
     <div class="container body-content">
+        <div class="row">
+            @if(ViewBag.Alerta != null) {
+                <p class="alert alert-danger" role="alert">@ViewBag.Alerta</p>
+            }
+        </div>        
+
         @RenderBody()
         <hr />
         <footer>
