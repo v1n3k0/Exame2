@@ -69,7 +69,7 @@ namespace Exame.Web.Controllers
             var cosifsList = new SelectList(
                 cosifs.Select(x => new
                 {
-                    Codigo = x.Codigo,
+                    x.Codigo,
                     Descricao = $"{x.Codigo} - ({x.Status})"
                 }),
                 "Codigo",
