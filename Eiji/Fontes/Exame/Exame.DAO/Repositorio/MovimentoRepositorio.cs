@@ -2,7 +2,6 @@
 using Exame.VO.Entidade.Procedure;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
@@ -20,10 +19,7 @@ namespace Exame.DAO.Repositorio
         private const string DESCRICAO = "DES_DESCRICAO";
         private const string DATAMOVIMENTO = "DAT_MOVIMENTO";
         private const string CODIGOUSUARIO = "COD_USUARIO";
-
-        private readonly string _connectionString = ConfigurationManager.ConnectionStrings["ExameConnetionString"].ConnectionString;
-
-
+        
         public bool Adicionar(Movimento movimento)
         {
             string queryString = $"INSERT INTO {TABELA} " +
@@ -33,7 +29,7 @@ namespace Exame.DAO.Repositorio
 
             var resultado = false;
 
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = Conexao.SqlConnection())
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@mes", movimento.Mes);
@@ -68,7 +64,7 @@ namespace Exame.DAO.Repositorio
 
             var movimentosProduto = new List<MovimentoProduto>();
 
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = Conexao.SqlConnection())
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
 
@@ -101,13 +97,13 @@ namespace Exame.DAO.Repositorio
             return movimentosProduto;
         }
 
-        public int GerarNumeroLancamento(int mes, int ano)
+        public int MaximoNumeroLancamento(int mes, int ano)
         {
             string queryString = "SELECT ISNULL(MAX(NUM_LANCAMENTO), 0) FROM MOVIMENTO_MANUAL WHERE DAT_MES = @mes AND DAT_ANO = @ano";
 
             var numeroLancamento = 1;
 
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = Conexao.SqlConnection())
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@mes", mes);
@@ -116,10 +112,8 @@ namespace Exame.DAO.Repositorio
                 try
                 {
                     connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-                    reader.Read();
-                    numeroLancamento = reader.GetInt32(0) + 1;
-                    reader.Close();
+                    object scalar = command.ExecuteScalar();
+                    numeroLancamento = (int)scalar;
                 }
                 catch (Exception ex)
                 {

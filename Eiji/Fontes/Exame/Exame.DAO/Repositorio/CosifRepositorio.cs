@@ -1,7 +1,6 @@
 ﻿using Exame.VO;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
@@ -15,8 +14,6 @@ namespace Exame.DAO.Repositorio
         private const string CLASSIFICACAO = "COD_CLASSIFICACAO";
         private const string STATUS = "STA_STATUS";
 
-        private readonly string _connectionString = ConfigurationManager.ConnectionStrings["ExameConnetionString"].ConnectionString;
-
         public IEnumerable<Cosif> ListarPorStatusPorProduto(string status, int codigoProduto)
         {
             string queryString = $"SELECT {CODIGO},{CODIGOPRODUTO},{CLASSIFICACAO},{STATUS} " +
@@ -25,7 +22,7 @@ namespace Exame.DAO.Repositorio
 
             var cosifs = new List<Cosif>();
 
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = Conexao.SqlConnection())
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@status", status);
