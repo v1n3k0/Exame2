@@ -4,15 +4,14 @@ D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.csprojAssembly
 D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.csproj.CoreCompileInputs.cache
 D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.dll
 D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.pdb
-E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.VO\bin\Debug\Exame.VO.dll
-E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.VO\bin\Debug\Exame.VO.pdb
-E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.csprojAssemblyReference.cache
-E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.csproj.CoreCompileInputs.cache
-E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.dll
-E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.pdb
 C:\Exame2\Eiji\Fontes\Exame\Exame.VO\bin\Debug\Exame.VO.dll
 C:\Exame2\Eiji\Fontes\Exame\Exame.VO\bin\Debug\Exame.VO.pdb
 C:\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.csprojAssemblyReference.cache
 C:\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.csproj.CoreCompileInputs.cache
 C:\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.dll
 C:\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.pdb
+E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.VO\bin\Debug\Exame.VO.dll
+E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.VO\bin\Debug\Exame.VO.pdb
+E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.csproj.CoreCompileInputs.cache
+E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.dll
+E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.pdb
