@@ -15,3 +15,4 @@ E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.VO\bin\Debug\Exame.VO.pdb
 E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.csproj.CoreCompileInputs.cache
 E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.dll
 E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.pdb
+E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.csprojAssemblyReference.cache

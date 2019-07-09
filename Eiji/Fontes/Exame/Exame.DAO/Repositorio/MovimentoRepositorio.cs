@@ -1,9 +1,7 @@
 ﻿using Exame.VO;
 using Exame.VO.Entidade.Procedure;
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Diagnostics;
 
 namespace Exame.DAO.Repositorio
 {
@@ -19,40 +17,20 @@ namespace Exame.DAO.Repositorio
         private const string DESCRICAO = "DES_DESCRICAO";
         private const string DATAMOVIMENTO = "DAT_MOVIMENTO";
         private const string CODIGOUSUARIO = "COD_USUARIO";
-        
+
         public bool Adicionar(Movimento movimento)
         {
-            string queryString = $"INSERT INTO {TABELA} " +
-                $"({MES},{ANO},{NUMEROLANCAMENTO},{CODIGOPRODUTO},{CODIGOCOSIF},{VALOR},{DESCRICAO},{DATAMOVIMENTO},{CODIGOUSUARIO})" +
-                "VALUES" +
-                $"(@mes, @ano, @numeroLancamento, @codigoProduto, @codigoCosif, @valor, @descricao, @dataMovimento, @codigoUsuario)";
-
             var resultado = false;
+            string queryString = string.Concat($"INSERT INTO {TABELA} ",
+                $"({MES},{ANO},{NUMEROLANCAMENTO},{CODIGOPRODUTO},{CODIGOCOSIF},{VALOR},{DESCRICAO},{DATAMOVIMENTO},{CODIGOUSUARIO})",
+                $"VALUES ({movimento.Mes}, {movimento.Ano}, {movimento.NumeroLancamento}, {movimento.CodigoProduto}, {movimento.CodigoCosif},",
+                $"{movimento.Valor}, '{movimento.Descricao}', '{movimento.DataMovimento}', '{movimento.CodigoUsuario}')");
 
             using (SqlConnection connection = Conexao.SqlConnection())
             {
-                SqlCommand command = new SqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@mes", movimento.Mes);
-                command.Parameters.AddWithValue("@ano", movimento.Ano);
-                command.Parameters.AddWithValue("@numeroLancamento", movimento.NumeroLancamento);
-                command.Parameters.AddWithValue("@codigoProduto", movimento.CodigoProduto);
-                command.Parameters.AddWithValue("@codigoCosif", movimento.CodigoCosif);
-                command.Parameters.AddWithValue("@valor", movimento.Valor);
-                command.Parameters.AddWithValue("@descricao", movimento.Descricao);
-                command.Parameters.AddWithValue("@dataMovimento", movimento.DataMovimento);
-                command.Parameters.AddWithValue("@codigoUsuario", movimento.CodigoUsuario);
+                int resultadoNonQuery = Conexao.ExecuteNonQuery(queryString, connection);
 
-                try
-                {
-                    connection.Open();
-                    int resultadoNonQuery = command.ExecuteNonQuery();
-
-                    resultado = resultadoNonQuery > 0;
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(string.Concat("ERROR: ", ex.Message));
-                }
+                resultado = resultadoNonQuery > 0;
             }
 
             return resultado;
@@ -60,18 +38,13 @@ namespace Exame.DAO.Repositorio
 
         public IEnumerable<MovimentoProduto> ListarMovimentoProduto()
         {
-            string queryString = "exec ListarMovimentoProduto";
-
             var movimentosProduto = new List<MovimentoProduto>();
+            string queryString = "exec ListarMovimentoProduto";
 
             using (SqlConnection connection = Conexao.SqlConnection())
             {
-                SqlCommand command = new SqlCommand(queryString, connection);
-
-                try
+                using (SqlDataReader reader = Conexao.ExecuteReader(queryString, connection))
                 {
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
                         movimentosProduto.Add(
@@ -86,11 +59,6 @@ namespace Exame.DAO.Repositorio
                                 Valor = reader.GetInt32(6)
                             });
                     }
-                    reader.Close();
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(string.Concat("ERROR: ", ex.Message));
                 }
             }
 
@@ -99,30 +67,17 @@ namespace Exame.DAO.Repositorio
 
         public int MaximoNumeroLancamento(int mes, int ano)
         {
-            string queryString = "SELECT ISNULL(MAX(NUM_LANCAMENTO), 0) FROM MOVIMENTO_MANUAL WHERE DAT_MES = @mes AND DAT_ANO = @ano";
-
             var numeroLancamento = 1;
+            string queryString = $"SELECT ISNULL(MAX(NUM_LANCAMENTO), 0) FROM MOVIMENTO_MANUAL WHERE DAT_MES = {mes} AND DAT_ANO = {ano}";
 
             using (SqlConnection connection = Conexao.SqlConnection())
             {
-                SqlCommand command = new SqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@mes", mes);
-                command.Parameters.AddWithValue("@ano", ano);
+                object scalar = Conexao.ExecuteScalar(queryString, connection);
 
-                try
-                {
-                    connection.Open();
-                    object scalar = command.ExecuteScalar();
-                    numeroLancamento = (int)scalar;
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(string.Concat("ERROR: ", ex.Message));
-                }
+                numeroLancamento = (int)scalar;
             }
 
             return numeroLancamento;
         }
-
     }
 }

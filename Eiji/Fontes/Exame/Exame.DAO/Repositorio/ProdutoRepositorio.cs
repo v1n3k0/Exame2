@@ -1,8 +1,6 @@
 ﻿using Exame.VO;
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Diagnostics;
 
 namespace Exame.DAO.Repositorio
 {
@@ -15,35 +13,23 @@ namespace Exame.DAO.Repositorio
 
         public IEnumerable<Produto> ListarPorStatus(string status)
         {
-            string queryString = $"SELECT {CODIGO},{DESCRICAO},{STATUS} " +
-                $"from {TABELA} WHERE " +
-                $"{STATUS} like @status";
-
             var produtos = new List<Produto>();
+            string queryString = $"SELECT {CODIGO},{DESCRICAO},{STATUS} from {TABELA} WHERE  {STATUS} like '{status}'";
 
             using (SqlConnection connection = Conexao.SqlConnection())
             {
-                SqlCommand command = new SqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@status", status);
-
-                try
+                using (SqlDataReader reader = Conexao.ExecuteReader(queryString, connection))
                 {
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
                         produtos.Add(
-                            new Produto() {
+                            new Produto()
+                            {
                                 Codigo = reader.GetInt32(0),
                                 Descricao = reader.GetString(1),
                                 Status = reader.GetString(2)
                             });
                     }
-                    reader.Close();
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(string.Concat("ERROR: ",ex.Message));
                 }
             }
 

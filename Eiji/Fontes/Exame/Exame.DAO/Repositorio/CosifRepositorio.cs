@@ -1,8 +1,6 @@
 ﻿using Exame.VO;
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Diagnostics;
 
 namespace Exame.DAO.Repositorio
 {
@@ -16,22 +14,14 @@ namespace Exame.DAO.Repositorio
 
         public IEnumerable<Cosif> ListarPorStatusPorProduto(string status, int codigoProduto)
         {
-            string queryString = $"SELECT {CODIGO},{CODIGOPRODUTO},{CLASSIFICACAO},{STATUS} " +
-                $"from {TABELA} " +
-                $"WHERE {STATUS} like @status AND {CODIGOPRODUTO} = @codigoProduto";
-
             var cosifs = new List<Cosif>();
+            string queryString = string.Concat($"SELECT {CODIGO},{CODIGOPRODUTO},{CLASSIFICACAO},{STATUS} ",
+                $"from {TABELA} WHERE {STATUS} like '{status}' AND {CODIGOPRODUTO} = {codigoProduto}");
 
             using (SqlConnection connection = Conexao.SqlConnection())
             {
-                SqlCommand command = new SqlCommand(queryString, connection);
-                command.Parameters.AddWithValue("@status", status);
-                command.Parameters.AddWithValue("@codigoProduto", codigoProduto);
-
-                try
+                using (SqlDataReader reader = Conexao.ExecuteReader(queryString, connection))
                 {
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
                         cosifs.Add(
@@ -43,11 +33,6 @@ namespace Exame.DAO.Repositorio
                                 Status = reader.GetString(3)
                             });
                     }
-                    reader.Close();
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(string.Concat("ERROR: ",ex.Message));
                 }
             }
 
