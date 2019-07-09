@@ -1,7 +1,6 @@
 ﻿using Exame.VO;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
@@ -14,8 +13,6 @@ namespace Exame.DAO.Repositorio
         private const string DESCRICAO = "DES_PRODUTO";
         private const string STATUS = "STA_STATUS";
 
-        private readonly string _connectionString = ConfigurationManager.ConnectionStrings["ExameConnetionString"].ConnectionString;
-
         public IEnumerable<Produto> ListarPorStatus(string status)
         {
             string queryString = $"SELECT {CODIGO},{DESCRICAO},{STATUS} " +
@@ -24,7 +21,7 @@ namespace Exame.DAO.Repositorio
 
             var produtos = new List<Produto>();
 
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = Conexao.SqlConnection())
             {
                 SqlCommand command = new SqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@status", status);

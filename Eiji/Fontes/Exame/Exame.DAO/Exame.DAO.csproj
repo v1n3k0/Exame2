@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Conexao.cs" />
     <Compile Include="Repositorio\CosifRepositorio.cs" />
     <Compile Include="Repositorio\MovimentoRepositorio.cs" />
     <Compile Include="Repositorio\ProdutoRepositorio.cs" />

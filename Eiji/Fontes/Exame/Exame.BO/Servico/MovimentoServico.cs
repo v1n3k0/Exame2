@@ -20,12 +20,19 @@ namespace Exame.BO.Servico
         public bool Adicionar(Movimento movimento)
         {
             movimento.DataMovimento = DateTime.Now;
-            movimento.NumeroLancamento = _repoMovimento.GerarNumeroLancamento(movimento.Mes, movimento.Ano);
+            movimento.NumeroLancamento = GerarNumeroLancamento(movimento.Mes, movimento.Ano);
             movimento.CodigoUsuario = "TESTE";
 
             bool resultado = _repoMovimento.Adicionar(movimento);
 
             return resultado;
+        }
+
+        private int GerarNumeroLancamento(int mes, int ano)
+        {
+            int numeroLancamento = _repoMovimento.MaximoNumeroLancamento(mes, ano) + 1;
+
+            return numeroLancamento;
         }
     }
 }
