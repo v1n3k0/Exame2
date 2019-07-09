@@ -10,9 +10,9 @@ namespace Exame.BO.Servico
     {
         private readonly MovimentoRepositorio _repoMovimento = new MovimentoRepositorio();
 
-        public IEnumerable<MovimentoProduto> ListarMovimentosProduto()
+        public List<MovimentoProduto> ListarMovimentosProduto()
         {
-            IEnumerable<MovimentoProduto> movimentosProduto = _repoMovimento.ListarMovimentoProduto();
+            List<MovimentoProduto> movimentosProduto = _repoMovimento.ListarMovimentoProduto();
 
             return movimentosProduto;
         }

@@ -36,7 +36,7 @@ namespace Exame.DAO.Repositorio
             return resultado;
         }
 
-        public IEnumerable<MovimentoProduto> ListarMovimentoProduto()
+        public List<MovimentoProduto> ListarMovimentoProduto()
         {
             var movimentosProduto = new List<MovimentoProduto>();
             string queryString = "exec ListarMovimentoProduto";

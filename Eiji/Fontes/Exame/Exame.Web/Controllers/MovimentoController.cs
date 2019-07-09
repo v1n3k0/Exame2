@@ -20,7 +20,7 @@ namespace Exame.Web.Controllers
         {
             IEnumerable<MovimentoProduto> movimentos = _movimentoServico.ListarMovimentosProduto();
 
-            IEnumerable<MovimentoProdutoView> movimentosProduto = movimentos.ToList().Select(x => (MovimentoProdutoView)x);
+            IEnumerable<MovimentoProdutoView> movimentosProduto = movimentos.Select(x => (MovimentoProdutoView)x);
 
             return View(movimentosProduto);
         }
