@@ -14,7 +14,6 @@ namespace Exame.DAO.Repositorio
 
         public IEnumerable<Cosif> ListarPorStatusPorProduto(string status, int codigoProduto)
         {
-            var cosifs = new List<Cosif>();
             string queryString = string.Concat($"SELECT {CODIGO},{CODIGOPRODUTO},{CLASSIFICACAO},{STATUS} ",
                 $"from {TABELA} WHERE {STATUS} like '{status}' AND {CODIGOPRODUTO} = {codigoProduto}");
 
@@ -24,19 +23,16 @@ namespace Exame.DAO.Repositorio
                 {
                     while (reader.Read())
                     {
-                        cosifs.Add(
-                            new Cosif()
-                            {
-                                Codigo = reader.GetInt32(0),
-                                CodigoProduto = reader.GetInt32(1),
-                                Classificacao = reader.GetString(2),
-                                Status = reader.GetString(3)
-                            });
+                        yield return new Cosif()
+                        {
+                            Codigo = reader.GetInt32(0),
+                            CodigoProduto = reader.GetInt32(1),
+                            Classificacao = reader.GetString(2),
+                            Status = reader.GetString(3)
+                        };
                     }
                 }
             }
-
-            return cosifs;
         }
     }
 }

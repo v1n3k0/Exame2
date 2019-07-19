@@ -13,7 +13,6 @@ namespace Exame.DAO.Repositorio
 
         public IEnumerable<Produto> ListarPorStatus(string status)
         {
-            var produtos = new List<Produto>();
             string queryString = $"SELECT {CODIGO},{DESCRICAO},{STATUS} from {TABELA} WHERE  {STATUS} like '{status}'";
 
             using (SqlConnection connection = Conexao.SqlConnection())
@@ -22,18 +21,15 @@ namespace Exame.DAO.Repositorio
                 {
                     while (reader.Read())
                     {
-                        produtos.Add(
-                            new Produto()
-                            {
-                                Codigo = reader.GetInt32(0),
-                                Descricao = reader.GetString(1),
-                                Status = reader.GetString(2)
-                            });
+                        yield return new Produto()
+                        {
+                            Codigo = reader.GetInt32(0),
+                            Descricao = reader.GetString(1),
+                            Status = reader.GetString(2)
+                        };
                     }
                 }
             }
-
-            return produtos;
         }
     }
 }

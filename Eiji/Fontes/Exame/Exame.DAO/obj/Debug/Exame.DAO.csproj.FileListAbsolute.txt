@@ -7,15 +7,6 @@ D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.csproj.CoreC
 D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.csproj.CopyComplete
 D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.dll
 D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.pdb
-C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\bin\Debug\Exame.DAO.dll
-C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\bin\Debug\Exame.DAO.pdb
-C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\bin\Debug\Exame.VO.dll
-C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\bin\Debug\Exame.VO.pdb
-C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.csprojAssemblyReference.cache
-C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.csproj.CoreCompileInputs.cache
-C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.csproj.CopyComplete
-C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.dll
-C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.pdb
 E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.DAO\bin\Debug\Exame.DAO.dll
 E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.DAO\bin\Debug\Exame.DAO.pdb
 E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.DAO\bin\Debug\Exame.VO.dll
@@ -25,3 +16,12 @@ E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.csproj.CoreCom
 E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.csproj.CopyComplete
 E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.dll
 E:\Meu Git\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.pdb
+C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\bin\Debug\Exame.DAO.dll
+C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\bin\Debug\Exame.DAO.pdb
+C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\bin\Debug\Exame.VO.dll
+C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\bin\Debug\Exame.VO.pdb
+C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.csprojAssemblyReference.cache
+C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.csproj.CoreCompileInputs.cache
+C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.csproj.CopyComplete
+C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.dll
+C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.pdb
