@@ -14,8 +14,8 @@ namespace Exame.DAO.Repositorio
 
         public IEnumerable<Cosif> ListarPorStatusPorProduto(string status, int codigoProduto)
         {
-            string queryString = string.Concat($"SELECT {CODIGO},{CODIGOPRODUTO},{CLASSIFICACAO},{STATUS} ",
-                $"from {TABELA} WHERE {STATUS} like '{status}' AND {CODIGOPRODUTO} = {codigoProduto}");
+            string queryString = $"SELECT {CODIGO},{CODIGOPRODUTO},{CLASSIFICACAO},{STATUS} " +
+                $"from {TABELA} WHERE {STATUS} like '{status}' AND {CODIGOPRODUTO} = {codigoProduto}";
 
             using (SqlConnection connection = Conexao.SqlConnection())
             {

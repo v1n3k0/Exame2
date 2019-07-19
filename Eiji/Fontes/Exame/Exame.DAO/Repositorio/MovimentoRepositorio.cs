@@ -21,10 +21,10 @@ namespace Exame.DAO.Repositorio
         public bool Adicionar(Movimento movimento)
         {
             var resultado = false;
-            string queryString = string.Concat($"INSERT INTO {TABELA} ",
-                $"({MES},{ANO},{NUMEROLANCAMENTO},{CODIGOPRODUTO},{CODIGOCOSIF},{VALOR},{DESCRICAO},{DATAMOVIMENTO},{CODIGOUSUARIO})",
-                $"VALUES ({movimento.Mes}, {movimento.Ano}, {movimento.NumeroLancamento}, {movimento.CodigoProduto}, {movimento.CodigoCosif},",
-                $"{movimento.Valor}, '{movimento.Descricao}', '{movimento.DataMovimento}', '{movimento.CodigoUsuario}')");
+            string queryString = $"INSERT INTO {TABELA} " +
+                $"({MES},{ANO},{NUMEROLANCAMENTO},{CODIGOPRODUTO},{CODIGOCOSIF},{VALOR},{DESCRICAO},{DATAMOVIMENTO},{CODIGOUSUARIO})" +
+                $"VALUES ({movimento.Mes}, {movimento.Ano}, {movimento.NumeroLancamento}, {movimento.CodigoProduto}, {movimento.CodigoCosif}," +
+                $"{movimento.Valor}, '{movimento.Descricao}', '{movimento.DataMovimento}', '{movimento.CodigoUsuario}')";
 
             using (SqlConnection connection = Conexao.SqlConnection())
             {
