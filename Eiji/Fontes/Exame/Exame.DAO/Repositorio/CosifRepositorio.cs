@@ -1,10 +1,11 @@
-﻿using Exame.VO;
+﻿using Exame.DAO.Interface.Repositorio;
+using Exame.VO;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace Exame.DAO.Repositorio
 {
-    public class CosifRepositorio
+    public class CosifRepositorio: ICosifRepositorio
     {
         private const string TABELA = "PRODUTO_COSIF";
         private const string CODIGO = "COD_COSIF";

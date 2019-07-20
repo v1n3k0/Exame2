@@ -1,4 +1,5 @@
-﻿using Exame.BO.Servico;
+﻿using Exame.BO.Interface.Servico;
+using Exame.BO.Servico;
 using Exame.VO;
 using Exame.VO.Entidade.Procedure;
 using Exame.Web.Models;
@@ -10,9 +11,9 @@ namespace Exame.Web.Controllers
 {
     public class MovimentoController : Controller
     {
-        private readonly ProdutoServico _produtoServico = new ProdutoServico();
-        private readonly CosifServico _cosifServico = new CosifServico();
-        private readonly MovimentoServico _movimentoServico = new MovimentoServico();
+        private readonly IProdutoServico _produtoServico = new ProdutoServico();
+        private readonly ICosifServico _cosifServico = new CosifServico();
+        private readonly IMovimentoServico _movimentoServico = new MovimentoServico();
 
         // GET: Movimento
         [HttpGet]

@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interface\Servico\ICosifServico.cs" />
+    <Compile Include="Interface\Servico\IMovimentoServico.cs" />
+    <Compile Include="Interface\Servico\IProdutoServico.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servico\CosifServico.cs" />
     <Compile Include="Servico\MovimentoServico.cs" />

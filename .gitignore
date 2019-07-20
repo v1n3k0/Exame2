@@ -29,3 +29,8 @@ Eiji/Fontes/Exame/Exame.DAO/bin/Debug/Exame.DAO.pdb
 Eiji/Fontes/Exame/Exame.DAO/obj/Debug/Exame.DAO.csprojAssemblyReference.cache
 *.cache
 Eiji/Fontes/Exame/Exame.DAO/obj/Debug/Exame.DAO.pdb
+Eiji/Fontes/Exame/.vs/Exame/config/applicationhost.config
+*.pdb
+*.dll
+*.cache
+Eiji/Fontes/Exame/Exame.BO/obj/Debug/Exame.BO.csproj.FileListAbsolute.txt

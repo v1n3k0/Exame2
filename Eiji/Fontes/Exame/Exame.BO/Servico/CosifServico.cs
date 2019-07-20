@@ -1,12 +1,14 @@
-﻿using Exame.DAO.Repositorio;
+﻿using Exame.BO.Interface.Servico;
+using Exame.DAO.Interface.Repositorio;
+using Exame.DAO.Repositorio;
 using Exame.VO;
 using System.Collections.Generic;
 
 namespace Exame.BO.Servico
 {
-    public class CosifServico
+    public class CosifServico : ICosifServico
     {
-        private readonly CosifRepositorio _repoCosif = new CosifRepositorio();
+        private readonly ICosifRepositorio _repoCosif = new CosifRepositorio();
 
         public IEnumerable<Cosif> ListarAtivoPorProduto(int codigoProduto)
         {

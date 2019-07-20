@@ -1,4 +1,6 @@
-﻿using Exame.DAO.Repositorio;
+﻿using Exame.BO.Interface.Servico;
+using Exame.DAO.Interface.Repositorio;
+using Exame.DAO.Repositorio;
 using Exame.VO;
 using Exame.VO.Entidade.Procedure;
 using System;
@@ -6,9 +8,9 @@ using System.Collections.Generic;
 
 namespace Exame.BO.Servico
 {
-    public class MovimentoServico
+    public class MovimentoServico: IMovimentoServico
     {
-        private readonly MovimentoRepositorio _repoMovimento = new MovimentoRepositorio();
+        private readonly IMovimentoRepositorio _repoMovimento = new MovimentoRepositorio();
 
         public List<MovimentoProduto> ListarMovimentosProduto()
         {

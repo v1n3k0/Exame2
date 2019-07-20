@@ -1,12 +1,14 @@
-﻿using Exame.DAO.Repositorio;
+﻿using Exame.BO.Interface.Servico;
+using Exame.DAO.Interface.Repositorio;
+using Exame.DAO.Repositorio;
 using Exame.VO;
 using System.Collections.Generic;
 
 namespace Exame.BO.Servico
 {
-    public class ProdutoServico
+    public class ProdutoServico: IProdutoServico
     {
-       private readonly ProdutoRepositorio  _repoProduto = new ProdutoRepositorio();
+       private readonly IProdutoRepositorio _repoProduto = new ProdutoRepositorio();
 
         public IEnumerable<Produto> ListarAtivo()
         {

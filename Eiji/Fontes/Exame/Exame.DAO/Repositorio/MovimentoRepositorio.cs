@@ -1,11 +1,12 @@
-﻿using Exame.VO;
+﻿using Exame.DAO.Interface.Repositorio;
+using Exame.VO;
 using Exame.VO.Entidade.Procedure;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace Exame.DAO.Repositorio
 {
-    public class MovimentoRepositorio
+    public class MovimentoRepositorio: IMovimentoRepositorio
     {
         private const string TABELA = "MOVIMENTO_MANUAL";
         private const string MES = "DAT_MES";

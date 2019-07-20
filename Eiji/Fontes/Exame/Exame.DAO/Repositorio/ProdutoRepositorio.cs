@@ -1,10 +1,11 @@
-﻿using Exame.VO;
+﻿using Exame.DAO.Interface.Repositorio;
+using Exame.VO;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace Exame.DAO.Repositorio
 {
-    public class ProdutoRepositorio
+    public class ProdutoRepositorio: IProdutoRepositorio
     {
         private const string TABELA = "PRODUTO";
         private const string CODIGO = "COD_PRODUTO";
