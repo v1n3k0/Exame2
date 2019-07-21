@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace Exame.BO.Servico
 {
-    public class ProdutoServico: IProdutoServico
+    public class ProdutoServico : IProdutoServico
     {
-       private readonly IProdutoRepositorio _repoProduto = new ProdutoRepositorio();
+        private readonly IProdutoRepositorio _repoProduto = new ProdutoRepositorio();
 
         public IEnumerable<Produto> ListarAtivo()
         {

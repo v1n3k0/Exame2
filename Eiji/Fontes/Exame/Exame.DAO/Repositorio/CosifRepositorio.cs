@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Exame.DAO.Repositorio
 {
-    public class CosifRepositorio: ICosifRepositorio
+    public class CosifRepositorio : ICosifRepositorio
     {
         private const string TABELA = "PRODUTO_COSIF";
         private const string CODIGO = "COD_COSIF";

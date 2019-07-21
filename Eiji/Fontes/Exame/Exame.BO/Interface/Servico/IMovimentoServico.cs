@@ -1,5 +1,4 @@
-﻿using Exame.VO;
-using Exame.VO.Entidade.Procedure;
+﻿using Exame.VO.Entidade.Procedure;
 using System.Collections.Generic;
 
 namespace Exame.BO.Interface.Servico

@@ -32,7 +32,7 @@ namespace Exame.Web.Controllers
         public ActionResult Create()
         {
             var movimento = new MovimentoView();
-            
+
             ListarProduto();
 
             return View(movimento);
@@ -50,7 +50,7 @@ namespace Exame.Web.Controllers
                 movimentoView.Valor,
                 movimentoView.Descricao);
 
-            if(resultado)
+            if (resultado)
                 return RedirectToAction("Index");
             else
             {

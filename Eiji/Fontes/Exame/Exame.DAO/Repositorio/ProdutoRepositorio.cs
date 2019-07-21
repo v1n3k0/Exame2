@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Exame.DAO.Repositorio
 {
-    public class ProdutoRepositorio: IProdutoRepositorio
+    public class ProdutoRepositorio : IProdutoRepositorio
     {
         private const string TABELA = "PRODUTO";
         private const string CODIGO = "COD_PRODUTO";
@@ -22,7 +22,7 @@ namespace Exame.DAO.Repositorio
                 {
                     while (reader.Read())
                     {
-                        yield return new Produto(reader.GetInt32(0), reader.GetString(1),  reader.GetString(2));
+                        yield return new Produto(reader.GetInt32(0), reader.GetString(1), reader.GetString(2));
                     }
                 }
             }

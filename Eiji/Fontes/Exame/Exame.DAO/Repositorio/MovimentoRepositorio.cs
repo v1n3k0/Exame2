@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace Exame.DAO.Repositorio
 {
-    public class MovimentoRepositorio: IMovimentoRepositorio
+    public class MovimentoRepositorio : IMovimentoRepositorio
     {
         private const string TABELA = "MOVIMENTO_MANUAL";
         private const string MES = "DAT_MES";
