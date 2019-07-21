@@ -34,3 +34,9 @@ Eiji/Fontes/Exame/.vs/Exame/config/applicationhost.config
 *.dll
 *.cache
 Eiji/Fontes/Exame/Exame.BO/obj/Debug/Exame.BO.csproj.FileListAbsolute.txt
+*.dll
+*.pdb
+*.cache
+*.pdb
+*.dll
+*.cache

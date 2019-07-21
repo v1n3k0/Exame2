@@ -8,6 +8,7 @@ namespace Exame.BO.Interface.Servico
     {
         List<MovimentoProduto> ListarMovimentosProduto();
 
-        bool Adicionar(Movimento movimento);
+        bool Adicionar(int mes, int ano, int codigoProduto, int codigoCosif, int valor,
+            string descricao);
     }
 }

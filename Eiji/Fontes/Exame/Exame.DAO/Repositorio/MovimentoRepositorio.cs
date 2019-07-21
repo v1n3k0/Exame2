@@ -49,16 +49,15 @@ namespace Exame.DAO.Repositorio
                     while (reader.Read())
                     {
                         movimentosProduto.Add(
-                            new MovimentoProduto()
-                            {
-                                Mes = reader.GetInt32(0),
-                                Ano = reader.GetInt32(1),
-                                CodigoProduto = reader.GetInt32(2),
-                                DescricaoProduto = reader.GetString(3),
-                                NumeroLancamento = reader.GetInt32(4),
-                                DescricaoMovimento = reader.GetString(5),
-                                Valor = reader.GetInt32(6)
-                            });
+                            new MovimentoProduto(
+                                reader.GetInt32(0),
+                                reader.GetInt32(1),
+                                reader.GetInt32(2),
+                                reader.GetString(3),
+                                reader.GetInt32(4),
+                                reader.GetString(5),
+                                reader.GetInt32(6)
+                            ));
                     }
                 }
             }

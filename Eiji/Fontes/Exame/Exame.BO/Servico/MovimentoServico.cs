@@ -19,11 +19,20 @@ namespace Exame.BO.Servico
             return movimentosProduto;
         }
 
-        public bool Adicionar(Movimento movimento)
+        public bool Adicionar(int mes, int ano, int codigoProduto, int codigoCosif, int valor,
+            string descricao)
         {
-            movimento.DataMovimento = DateTime.Now;
-            movimento.NumeroLancamento = GerarNumeroLancamento(movimento.Mes, movimento.Ano);
-            movimento.CodigoUsuario = "TESTE";
+            int numeroLancamento = GerarNumeroLancamento(mes, ano);
+
+            Movimento movimento = new Movimento(
+                mes,
+                ano,
+                numeroLancamento,
+                codigoProduto,
+                codigoCosif,
+                valor,
+                descricao
+                );
 
             bool resultado = _repoMovimento.Adicionar(movimento);
 

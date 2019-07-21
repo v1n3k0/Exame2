@@ -22,12 +22,7 @@ namespace Exame.DAO.Repositorio
                 {
                     while (reader.Read())
                     {
-                        yield return new Produto()
-                        {
-                            Codigo = reader.GetInt32(0),
-                            Descricao = reader.GetString(1),
-                            Status = reader.GetString(2)
-                        };
+                        yield return new Produto(reader.GetInt32(0), reader.GetString(1),  reader.GetString(2));
                     }
                 }
             }

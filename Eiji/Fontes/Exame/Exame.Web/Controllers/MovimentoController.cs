@@ -23,6 +23,8 @@ namespace Exame.Web.Controllers
 
             IEnumerable<MovimentoProdutoView> movimentosProduto = movimentos.Select(x => (MovimentoProdutoView)x);
 
+            movimentos = null;
+
             return View(movimentosProduto);
         }
 
@@ -39,18 +41,14 @@ namespace Exame.Web.Controllers
         [HttpPost]
         public ActionResult Create(MovimentoView movimentoView)
         {
-            Movimento movimento = new Movimento()
-            {
-                Mes = movimentoView.Mes,
-                Ano = movimentoView.Ano,
-                CodigoCosif = movimentoView.CodigoCosif,
-                CodigoProduto = movimentoView.CodigoProduto,
-                CodigoUsuario = movimentoView.CodigoUsuario,
-                Descricao = movimentoView.Descricao,
-                Valor = movimentoView.Valor
-            };
 
-            bool resultado = _movimentoServico.Adicionar(movimento);
+            bool resultado = _movimentoServico.Adicionar(
+                movimentoView.Mes,
+                movimentoView.Ano,
+                movimentoView.CodigoProduto,
+                movimentoView.CodigoCosif,
+                movimentoView.Valor,
+                movimentoView.Descricao);
 
             if(resultado)
                 return RedirectToAction("Index");
@@ -77,6 +75,8 @@ namespace Exame.Web.Controllers
                 "Descricao"
                 );
 
+            cosifs = null;
+
             return Json(cosifsList, JsonRequestBehavior.AllowGet);
         }
 
@@ -89,6 +89,8 @@ namespace Exame.Web.Controllers
                 "Codigo",
                 "Descricao"
                 );
+
+            produtos = null;
         }
     }
 }

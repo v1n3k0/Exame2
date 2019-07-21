@@ -24,13 +24,7 @@ namespace Exame.DAO.Repositorio
                 {
                     while (reader.Read())
                     {
-                        yield return new Cosif()
-                        {
-                            Codigo = reader.GetInt32(0),
-                            CodigoProduto = reader.GetInt32(1),
-                            Classificacao = reader.GetString(2),
-                            Status = reader.GetString(3)
-                        };
+                        yield return new Cosif(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetString(3));
                     }
                 }
             }
