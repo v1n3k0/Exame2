@@ -8,6 +8,7 @@ namespace Exame.DAO
     public static class Conexao
     {
         private static string _connectionString = ConfigurationManager.ConnectionStrings["ExameConnetionString"].ConnectionString;
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         public static SqlConnection SqlConnection()
         {
@@ -18,6 +19,7 @@ namespace Exame.DAO
 
         public static int ExecuteNonQuery(string queryString, SqlConnection connection)
         {
+            Logger.Info($"Inicio ExecuteNonQuery: {queryString}");
             SqlCommand command = new SqlCommand(queryString, connection);
             int resultadoNonQuery = 0;
 
@@ -29,6 +31,7 @@ namespace Exame.DAO
             catch (Exception ex)
             {
                 Debug.WriteLine(string.Concat("ERROR: ", ex.Message));
+                Logger.Error(ex, "ExecuteNonQuery: ");
             }
 
             return resultadoNonQuery;
@@ -36,6 +39,7 @@ namespace Exame.DAO
 
         public static SqlDataReader ExecuteReader(string queryString, SqlConnection connection)
         {
+            Logger.Info($"Inicio ExecuteReader: {queryString}");
             SqlCommand command = new SqlCommand(queryString, connection);
             SqlDataReader reader = null;
 
@@ -47,6 +51,7 @@ namespace Exame.DAO
             catch (Exception ex)
             {
                 Debug.WriteLine(string.Concat("ERROR: ", ex.Message));
+                Logger.Error(ex, "ExecuteReader: ");
             }
 
             return reader;
@@ -54,6 +59,7 @@ namespace Exame.DAO
 
         public static object ExecuteScalar(string queryString, SqlConnection connection)
         {
+            Logger.Info($"Inicio ExecuteScalar {queryString}");
             SqlCommand command = new SqlCommand(queryString, connection);
             object scalar = null;
 
@@ -65,6 +71,7 @@ namespace Exame.DAO
             catch (Exception ex)
             {
                 Debug.WriteLine(string.Concat("ERROR: ", ex.Message));
+                Logger.Error(ex, "ExecuteScalar: ");
             }
 
             return scalar;

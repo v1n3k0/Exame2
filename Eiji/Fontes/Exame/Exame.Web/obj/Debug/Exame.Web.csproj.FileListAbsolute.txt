@@ -265,3 +265,5 @@ D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.Web\obj\Debug\Exame.Web.csproj.CoreC
 D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.Web\obj\Debug\Exame.Web.csproj.CopyComplete
 D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.Web\obj\Debug\Exame.Web.dll
 D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.Web\obj\Debug\Exame.Web.pdb
+C:\Exame2\Eiji\Fontes\Exame\Exame.Web\bin\NLog.dll
+C:\Exame2\Eiji\Fontes\Exame\Exame.Web\bin\NLog.xml

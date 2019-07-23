@@ -25,3 +25,5 @@ D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.csproj.CoreC
 D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.csproj.CopyComplete
 D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.dll
 D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.DAO\obj\Debug\Exame.DAO.pdb
+C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\bin\Debug\NLog.dll
+C:\Exame2\Eiji\Fontes\Exame\Exame.DAO\bin\Debug\NLog.xml
