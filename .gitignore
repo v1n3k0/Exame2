@@ -44,3 +44,7 @@ Eiji/Fontes/Exame/Exame.BO/obj/Debug/Exame.BO.csproj.FileListAbsolute.txt
 *.dll
 *.pdb
 *.cache
+*.log
+Eiji/Fontes/Exame/Exame.BO/bin/Debug/NLog.xml
+Eiji/Fontes/Exame/Exame.DAO/bin/Debug/NLog.xml
+Eiji/Fontes/Exame/Exame.Web/bin/NLog.xml
