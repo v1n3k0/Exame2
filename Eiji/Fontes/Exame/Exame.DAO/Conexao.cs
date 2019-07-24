@@ -19,7 +19,7 @@ namespace Exame.DAO
 
         public static int ExecuteNonQuery(string queryString, SqlConnection connection)
         {
-            Logger.Info($"Inicio ExecuteNonQuery: {queryString}");
+            Logger.Info($"ExecuteNonQuery: {queryString}");
             SqlCommand command = new SqlCommand(queryString, connection);
             int resultadoNonQuery = 0;
 
@@ -34,12 +34,13 @@ namespace Exame.DAO
                 Logger.Error(ex, "ExecuteNonQuery: ");
             }
 
+            Logger.Info($"ExecuteNonQuery: {resultadoNonQuery}");
             return resultadoNonQuery;
         }
 
         public static SqlDataReader ExecuteReader(string queryString, SqlConnection connection)
         {
-            Logger.Info($"Inicio ExecuteReader: {queryString}");
+            Logger.Info($"ExecuteReader: {queryString}");
             SqlCommand command = new SqlCommand(queryString, connection);
             SqlDataReader reader = null;
 
@@ -54,12 +55,13 @@ namespace Exame.DAO
                 Logger.Error(ex, "ExecuteReader: ");
             }
 
+            Logger.Info($"ExecuteReader: {reader}");
             return reader;
         }
 
         public static object ExecuteScalar(string queryString, SqlConnection connection)
         {
-            Logger.Info($"Inicio ExecuteScalar {queryString}");
+            Logger.Info($"ExecuteScalar: {queryString}");
             SqlCommand command = new SqlCommand(queryString, connection);
             object scalar = null;
 
@@ -74,6 +76,7 @@ namespace Exame.DAO
                 Logger.Error(ex, "ExecuteScalar: ");
             }
 
+            Logger.Info($"ExecuteScalar: {scalar}");
             return scalar;
         }
     }

@@ -10,8 +10,3 @@ C:\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.csproj.CoreCompileInputs
 C:\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.dll
 C:\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.pdb
 C:\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.csprojAssemblyReference.cache
-D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.VO\bin\Debug\Exame.VO.dll
-D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.VO\bin\Debug\Exame.VO.pdb
-D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.csproj.CoreCompileInputs.cache
-D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.dll
-D:\MeuGitHub\Exame2\Eiji\Fontes\Exame\Exame.VO\obj\Debug\Exame.VO.pdb
