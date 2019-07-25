@@ -12,8 +12,12 @@ namespace Exame.DAO.Repositorio
         private const string DESCRICAO = "DES_PRODUTO";
         private const string STATUS = "STA_STATUS";
 
+        private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
+
         public IEnumerable<Produto> ListarPorStatus(string status)
         {
+            _logger.Info($"ListarPorStatus [INICIO] | status: {status}");
+
             string queryString = $"SELECT {CODIGO},{DESCRICAO},{STATUS} from {TABELA} WHERE  {STATUS} like '{status}'";
 
             using (SqlConnection connection = Conexao.SqlConnection())
@@ -26,6 +30,8 @@ namespace Exame.DAO.Repositorio
                     }
                 }
             }
+
+            _logger.Info("ListarPorStatus [FIM]");
         }
     }
 }

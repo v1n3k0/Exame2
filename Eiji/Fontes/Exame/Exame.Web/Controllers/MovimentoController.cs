@@ -14,33 +14,40 @@ namespace Exame.Web.Controllers
         private readonly IProdutoServico _produtoServico = new ProdutoServico();
         private readonly ICosifServico _cosifServico = new CosifServico();
         private readonly IMovimentoServico _movimentoServico = new MovimentoServico();
+        private readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
         // GET: Movimento
         [HttpGet]
         public ActionResult Index()
         {
+            _logger.Info("Index [INICIO]");
+
             IEnumerable<MovimentoProduto> movimentos = _movimentoServico.ListarMovimentosProduto();
 
             IEnumerable<MovimentoProdutoView> movimentosProduto = movimentos.Select(x => (MovimentoProdutoView)x);
 
             movimentos = null;
 
+            _logger.Info("Index [FIM]");
             return View(movimentosProduto);
         }
 
         [HttpGet]
         public ActionResult Create()
         {
+            _logger.Info("Create [INICIO]");
             var movimento = new MovimentoView();
 
             ListarProduto();
 
+            _logger.Info("Create [FIM]");
             return View(movimento);
         }
 
         [HttpPost]
         public ActionResult Create(MovimentoView movimentoView)
         {
+            _logger.Info($"Create [INICIO]|movimentoView: {movimentoView}");
 
             bool resultado = _movimentoServico.Adicionar(
                 movimentoView.Mes,
@@ -51,18 +58,24 @@ namespace Exame.Web.Controllers
                 movimentoView.Descricao);
 
             if (resultado)
+            {
+                _logger.Info($"Create [FIM]|resultado: {resultado}");
                 return RedirectToAction("Index");
+            }
             else
             {
                 ViewBag.Alerta = "Erro ao cadastrar movimento.";
                 ListarProduto();
+                _logger.Warn($"Create [FIM]|resultado: {resultado} Alerta: {ViewBag.Alerta}");
                 return View(movimentoView);
             }
         }
 
         [HttpGet]
-        public JsonResult getCosifs(int codigoProduto)
+        public JsonResult GetCosifs(int codigoProduto)
         {
+            _logger.Info($"GetCosifs [INICIO]|codigoProduto: {codigoProduto}");
+
             IEnumerable<Cosif> cosifs = _cosifServico.ListarAtivoPorProduto(codigoProduto);
 
             var cosifsList = new SelectList(
@@ -77,11 +90,14 @@ namespace Exame.Web.Controllers
 
             cosifs = null;
 
+            _logger.Info("GetCosifs [FIM]");
             return Json(cosifsList, JsonRequestBehavior.AllowGet);
         }
 
         private void ListarProduto()
         {
+            _logger.Info("ListarProduto [INICIO]");
+
             IEnumerable<Produto> produtos = _produtoServico.ListarAtivo();
 
             ViewBag.Produtos = new SelectList(
@@ -91,6 +107,8 @@ namespace Exame.Web.Controllers
                 );
 
             produtos = null;
+
+            _logger.Info("ListarProduto [FIM]");
         }
     }
 }

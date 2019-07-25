@@ -13,8 +13,12 @@ namespace Exame.DAO.Repositorio
         private const string CLASSIFICACAO = "COD_CLASSIFICACAO";
         private const string STATUS = "STA_STATUS";
 
+        private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
+
         public IEnumerable<Cosif> ListarPorStatusPorProduto(string status, int codigoProduto)
         {
+            _logger.Info($"ListarPorStatusPorProduto [INICIO] | status:{status}");
+
             string queryString = $"SELECT {CODIGO},{CODIGOPRODUTO},{CLASSIFICACAO},{STATUS} " +
                 $"from {TABELA} WHERE {STATUS} like '{status}' AND {CODIGOPRODUTO} = {codigoProduto}";
 
@@ -28,6 +32,8 @@ namespace Exame.DAO.Repositorio
                     }
                 }
             }
+
+            _logger.Info("ListarPorStatusPorProduto [FIM]");
         }
     }
 }

@@ -19,8 +19,12 @@ namespace Exame.DAO.Repositorio
         private const string DATAMOVIMENTO = "DAT_MOVIMENTO";
         private const string CODIGOUSUARIO = "COD_USUARIO";
 
+        private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
+
         public bool Adicionar(Movimento movimento)
         {
+            _logger.Info("Adicionar [INICIO]");
+
             var resultado = false;
             string queryString = $"INSERT INTO {TABELA} " +
                 $"({MES},{ANO},{NUMEROLANCAMENTO},{CODIGOPRODUTO},{CODIGOCOSIF},{VALOR},{DESCRICAO},{DATAMOVIMENTO},{CODIGOUSUARIO})" +
@@ -34,11 +38,14 @@ namespace Exame.DAO.Repositorio
                 resultado = resultadoNonQuery > 0;
             }
 
+            _logger.Info("Adicionar [FIM]");
             return resultado;
         }
 
         public List<MovimentoProduto> ListarMovimentoProduto()
         {
+            _logger.Info("ListarMovimentoProduto [INICIO]");
+
             var movimentosProduto = new List<MovimentoProduto>();
             string queryString = "exec ListarMovimentoProduto";
 
@@ -62,11 +69,14 @@ namespace Exame.DAO.Repositorio
                 }
             }
 
+            _logger.Info("ListarMovimentoProduto [FIM]");
             return movimentosProduto;
         }
 
         public int MaximoNumeroLancamento(int mes, int ano)
         {
+            _logger.Info($"MaximoNumeroLancamento [INICIO] | mes: {mes}, ano {ano}");
+
             var numeroLancamento = 1;
             string queryString = $"SELECT ISNULL(MAX(NUM_LANCAMENTO), 0) FROM MOVIMENTO_MANUAL WHERE DAT_MES = {mes} AND DAT_ANO = {ano}";
 
@@ -77,6 +87,7 @@ namespace Exame.DAO.Repositorio
                 numeroLancamento = (int)scalar;
             }
 
+            _logger.Info("MaximoNumeroLancamento [FIM]");
             return numeroLancamento;
         }
     }

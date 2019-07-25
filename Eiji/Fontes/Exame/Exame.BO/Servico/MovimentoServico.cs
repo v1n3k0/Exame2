@@ -10,17 +10,23 @@ namespace Exame.BO.Servico
     public class MovimentoServico : IMovimentoServico
     {
         private readonly IMovimentoRepositorio _repoMovimento = new MovimentoRepositorio();
+        private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
         public List<MovimentoProduto> ListarMovimentosProduto()
         {
+            _logger.Info("ListarMovimentosProduto [INICIO]");
+
             List<MovimentoProduto> movimentosProduto = _repoMovimento.ListarMovimentoProduto();
 
+            _logger.Info("ListarMovimentosProduto [FIM]");
             return movimentosProduto;
         }
 
         public bool Adicionar(int mes, int ano, int codigoProduto, int codigoCosif, int valor,
             string descricao)
         {
+            _logger.Info($"Adicionar [INICIO]|mes: {mes}, ano: {ano}, codigoProduto: {codigoProduto}, codigoCosif: {codigoCosif}, valor: {valor}, descricao: {descricao}");
+
             int numeroLancamento = GerarNumeroLancamento(mes, ano);
 
             Movimento movimento = new Movimento(
@@ -35,13 +41,17 @@ namespace Exame.BO.Servico
 
             bool resultado = _repoMovimento.Adicionar(movimento);
 
+            _logger.Info("Adicionar [FIM]");
             return resultado;
         }
 
         private int GerarNumeroLancamento(int mes, int ano)
         {
+            _logger.Info($"GerarNumeroLancamento [INICIO]|mes: {mes}, ano: {ano}");
+
             int numeroLancamento = _repoMovimento.MaximoNumeroLancamento(mes, ano) + 1;
 
+            _logger.Info($"GerarNumeroLancamento [FIM]|numeroLancamento: {numeroLancamento}");
             return numeroLancamento;
         }
     }
