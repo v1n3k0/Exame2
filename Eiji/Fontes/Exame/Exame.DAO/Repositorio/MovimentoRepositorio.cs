@@ -38,7 +38,7 @@ namespace Exame.DAO.Repositorio
                 resultado = resultadoNonQuery > 0;
             }
 
-            _logger.Info("Adicionar [FIM]");
+            _logger.Info($"Adicionar [FIM]| resultado: {resultado}");
             return resultado;
         }
 
@@ -87,7 +87,7 @@ namespace Exame.DAO.Repositorio
                 numeroLancamento = (int)scalar;
             }
 
-            _logger.Info("MaximoNumeroLancamento [FIM]");
+            _logger.Info($"MaximoNumeroLancamento [FIM]| numeroLancamento: {numeroLancamento}");
             return numeroLancamento;
         }
     }

@@ -41,7 +41,7 @@ namespace Exame.BO.Servico
 
             bool resultado = _repoMovimento.Adicionar(movimento);
 
-            _logger.Info("Adicionar [FIM]");
+            _logger.Info($"Adicionar [FIM]| resultado: {resultado}");
             return resultado;
         }
 
