@@ -36,7 +36,8 @@ namespace Exame.BO.Servico
                 codigoProduto,
                 codigoCosif,
                 valor,
-                descricao
+                descricao,
+                "TESTE"
                 );
 
             bool resultado = _repoMovimento.Adicionar(movimento);

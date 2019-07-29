@@ -15,7 +15,7 @@ namespace Exame.VO
         public string CodigoUsuario { get; private set; }
 
         public Movimento(int mes, int ano, int numeroLancamento, int codigoProduto, int codigoCosif, int valor, 
-            string descricao)
+            string descricao, string codigoUsuario)
         {
             Mes = mes;
             Ano = ano;
@@ -25,7 +25,7 @@ namespace Exame.VO
             Valor = valor;
             Descricao = descricao;
             DataMovimento = DateTime.Now;
-            CodigoUsuario = "TESTE";
+            CodigoUsuario = codigoUsuario;
         }
     }
 }

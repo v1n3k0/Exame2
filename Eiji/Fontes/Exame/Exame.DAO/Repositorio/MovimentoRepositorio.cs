@@ -29,7 +29,7 @@ namespace Exame.DAO.Repositorio
             string queryString = $"INSERT INTO {TABELA} " +
                 $"({MES},{ANO},{NUMEROLANCAMENTO},{CODIGOPRODUTO},{CODIGOCOSIF},{VALOR},{DESCRICAO},{DATAMOVIMENTO},{CODIGOUSUARIO})" +
                 $"VALUES ({movimento.Mes}, {movimento.Ano}, {movimento.NumeroLancamento}, {movimento.CodigoProduto}, {movimento.CodigoCosif}," +
-                $"{movimento.Valor}, '{movimento.Descricao}', '{movimento.DataMovimento}', '{movimento.CodigoUsuario}')";
+                $"{movimento.Valor}, '{movimento.Descricao}', '{movimento.DataMovimento.ToString("yyyy-MM-dd HH:mm:ss")}', '{movimento.CodigoUsuario}')";
 
             using (SqlConnection connection = Conexao.SqlConnection())
             {
