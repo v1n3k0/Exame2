@@ -25,19 +25,5 @@ namespace Exame.Web.Models
 
         [Display(Name = "Valor")]
         public int Valor { get; set; }
-
-        public static explicit operator MovimentoProdutoView(MovimentoProduto v)
-        {
-            return new MovimentoProdutoView()
-            {
-                Mes = v.Mes,
-                Ano = v.Ano,
-                CodigoProduto = v.CodigoProduto,
-                DescricaoMovimento = v.DescricaoMovimento,
-                NumeroLancamento = v.NumeroLancamento,
-                DescricaoProduto = v.DescricaoProduto,
-                Valor = v.Valor
-            };
-        }
     }
 }

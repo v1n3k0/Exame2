@@ -1,4 +1,5 @@
-﻿using Exame.BO.Interface.Servico;
+﻿using AutoMapper;
+using Exame.BO.Interface.Servico;
 using Exame.BO.Servico;
 using Exame.VO;
 using Exame.VO.Entidade.Procedure;
@@ -15,18 +16,28 @@ namespace Exame.Web.Controllers
         private readonly ICosifServico _cosifServico = new CosifServico();
         private readonly IMovimentoServico _movimentoServico = new MovimentoServico();
         private readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
+        private readonly IMapper _mapper;
+
+        public MovimentoController()
+        {
+            MapperConfiguration ConfiguracaoMapper = new MapperConfiguration(cfg => 
+            {
+                cfg.CreateMap<MovimentoProduto, MovimentoProdutoView>();
+            });
+
+            ConfiguracaoMapper.AssertConfigurationIsValid();
+            _mapper = ConfiguracaoMapper.CreateMapper();
+        }
 
         // GET: Movimento
         [HttpGet]
         public ActionResult Index()
         {
             _logger.Info("Index [INICIO]");
+            
+            IEnumerable<MovimentoProduto> movimentos = _movimentoServico.ListarMovimentosProduto();                     
 
-            IEnumerable<MovimentoProduto> movimentos = _movimentoServico.ListarMovimentosProduto();
-
-            IEnumerable<MovimentoProdutoView> movimentosProduto = movimentos.Select(x => (MovimentoProdutoView)x);
-
-            movimentos = null;
+            IEnumerable<MovimentoProdutoView> movimentosProduto = _mapper.Map<IEnumerable<MovimentoProduto>, IEnumerable<MovimentoProdutoView>>(movimentos);
 
             _logger.Info("Index [FIM]");
             return View(movimentosProduto);
