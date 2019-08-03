@@ -1,6 +1,8 @@
-﻿using Exame.DAO.Interface.Repositorio;
+﻿using Exame.DAO.Interface;
+using Exame.DAO.Interface.Repositorio;
 using Exame.VO;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Exame.DAO.Repositorio
@@ -12,22 +14,26 @@ namespace Exame.DAO.Repositorio
         private const string DESCRICAO = "DES_PRODUTO";
         private const string STATUS = "STA_STATUS";
 
+        private readonly IConexao _conexao = new Conexao();
         private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
         public IEnumerable<Produto> ListarPorStatus(string status)
         {
             _logger.Info($"ListarPorStatus [INICIO] | status: {status}");
 
-            string queryString = $"SELECT {CODIGO},{DESCRICAO},{STATUS} from {TABELA} WHERE  {STATUS} like '{status}'";
+            string queryString = $"SELECT {CODIGO},{DESCRICAO},{STATUS} from {TABELA} WHERE  {STATUS} like @status";
 
-            using (SqlConnection connection = Conexao.SqlConnection())
+            SqlParameter[] parameters = 
             {
-                using (SqlDataReader reader = Conexao.ExecuteReader(queryString, connection))
+                new SqlParameter{ParameterName = "@status", Value = status}
+            };
+
+            using (SqlConnection connection = _conexao.SqlConnection())
+            using (IDataReader reader = _conexao.ExecuteReader(queryString, parameters, connection))
+            {
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        yield return new Produto(reader.GetInt32(0), reader.GetString(1), reader.GetString(2));
-                    }
+                    yield return new Produto(reader.GetInt32(0), reader.GetString(1), reader.GetString(2));
                 }
             }
 

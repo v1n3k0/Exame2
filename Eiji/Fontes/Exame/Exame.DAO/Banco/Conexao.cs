@@ -1,15 +1,17 @@
-﻿using System;
+﻿using Exame.DAO.Interface;
+using System;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Exame.DAO
 {
-    public static class Conexao
+    public class Conexao: IConexao
     {
-        private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["ExameConnetionString"].ConnectionString;
+        private readonly string _connectionString = ConfigurationManager.ConnectionStrings["ExameConnetionString"].ConnectionString;
         private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
-        public static SqlConnection SqlConnection()
+        public SqlConnection SqlConnection()
         {
             _logger.Info("SqlConnection [INICIO]");
 
@@ -19,11 +21,12 @@ namespace Exame.DAO
             return connection;
         }
 
-        public static int ExecuteNonQuery(string queryString, SqlConnection connection)
+        public int ExecuteNonQuery(string queryString, SqlParameter[] parameters, SqlConnection connection)
         {
             _logger.Info($"ExecuteNonQuery [INICIO]|queryString: {queryString}");
 
-            SqlCommand command = new SqlCommand(queryString, connection);
+            var command = new SqlCommand(queryString, connection);
+            command.Parameters.AddRange(parameters);
             int resultadoNonQuery = 0;
 
             try
@@ -40,12 +43,12 @@ namespace Exame.DAO
             return resultadoNonQuery;
         }
 
-        public static SqlDataReader ExecuteReader(string queryString, SqlConnection connection)
+        public IDataReader ExecuteReader(string queryString, SqlConnection connection)
         {
             _logger.Info($"ExecuteReader [INICIO]|queryString: {queryString}");
 
-            SqlCommand command = new SqlCommand(queryString, connection);
-            SqlDataReader reader = null;
+            var command = new SqlCommand(queryString, connection);
+            IDataReader reader = null;
 
             try
             {
@@ -61,11 +64,34 @@ namespace Exame.DAO
             return reader;
         }
 
-        public static object ExecuteScalar(string queryString, SqlConnection connection)
+        public IDataReader ExecuteReader(string queryString, SqlParameter[] parameters, SqlConnection connection)
+        {
+            _logger.Info($"ExecuteReader [INICIO]|queryString: {queryString}");
+
+            var command = new SqlCommand(queryString, connection);
+            command.Parameters.AddRange(parameters);
+            IDataReader reader = null;
+
+            try
+            {
+                connection.Open();
+                reader = command.ExecuteReader();
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "ExecuteReader: ");
+            }
+
+            _logger.Info("ExecuteReader [FIM]");
+            return reader;
+        }
+
+        public object ExecuteScalar(string queryString, SqlParameter[] parameters, SqlConnection connection)
         {
             _logger.Info($"ExecuteScalar [INICIO]|queryString: {queryString}");
 
-            SqlCommand command = new SqlCommand(queryString, connection);
+            var command = new SqlCommand(queryString, connection);
+            command.Parameters.AddRange(parameters);
             object scalar = null;
 
             try

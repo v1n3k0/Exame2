@@ -93,7 +93,7 @@ namespace Exame.Web.Controllers
                 cosifs.Select(x => new
                 {
                     x.Codigo,
-                    Descricao = $"{x.Codigo} - ({x.Status})"
+                    Descricao = $"{x.Codigo} - ({x.Classificacao})"
                 }),
                 "Codigo",
                 "Descricao"

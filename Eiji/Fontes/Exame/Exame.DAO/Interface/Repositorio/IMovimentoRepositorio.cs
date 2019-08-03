@@ -8,7 +8,7 @@ namespace Exame.DAO.Interface.Repositorio
     {
         bool Adicionar(Movimento movimento);
 
-        List<MovimentoProduto> ListarMovimentoProduto();
+        IEnumerable<MovimentoProduto> ListarMovimentoProduto();
 
         int MaximoNumeroLancamento(int mes, int ano);
     }

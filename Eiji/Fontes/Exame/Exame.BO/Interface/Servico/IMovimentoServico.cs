@@ -5,7 +5,7 @@ namespace Exame.BO.Interface.Servico
 {
     public interface IMovimentoServico
     {
-        List<MovimentoProduto> ListarMovimentosProduto();
+        IEnumerable<MovimentoProduto> ListarMovimentosProduto();
 
         bool Adicionar(int mes, int ano, int codigoProduto, int codigoCosif, int valor,
             string descricao);

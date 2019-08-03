@@ -12,11 +12,11 @@ namespace Exame.BO.Servico
         private readonly IMovimentoRepositorio _repoMovimento = new MovimentoRepositorio();
         private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
-        public List<MovimentoProduto> ListarMovimentosProduto()
+        public IEnumerable<MovimentoProduto> ListarMovimentosProduto()
         {
             _logger.Info("ListarMovimentosProduto [INICIO]");
 
-            List<MovimentoProduto> movimentosProduto = _repoMovimento.ListarMovimentoProduto();
+            IEnumerable<MovimentoProduto> movimentosProduto = _repoMovimento.ListarMovimentoProduto();
 
             _logger.Info("ListarMovimentosProduto [FIM]");
             return movimentosProduto;

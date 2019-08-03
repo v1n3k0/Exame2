@@ -1,6 +1,8 @@
-﻿using Exame.DAO.Interface.Repositorio;
+﻿using Exame.DAO.Interface;
+using Exame.DAO.Interface.Repositorio;
 using Exame.VO;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Exame.DAO.Repositorio
@@ -13,23 +15,27 @@ namespace Exame.DAO.Repositorio
         private const string CLASSIFICACAO = "COD_CLASSIFICACAO";
         private const string STATUS = "STA_STATUS";
 
+        private readonly IConexao _conexao = new Conexao();
         private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
         public IEnumerable<Cosif> ListarPorStatusPorProduto(string status, int codigoProduto)
         {
             _logger.Info($"ListarPorStatusPorProduto [INICIO] | status:{status}");
 
-            string queryString = $"SELECT {CODIGO},{CODIGOPRODUTO},{CLASSIFICACAO},{STATUS} " +
-                $"from {TABELA} WHERE {STATUS} like '{status}' AND {CODIGOPRODUTO} = {codigoProduto}";
+            string queryString = $"SELECT {CODIGO},{CODIGOPRODUTO},{CLASSIFICACAO},{STATUS} from {TABELA} WHERE {STATUS} like @status AND {CODIGOPRODUTO} = @codigoProduto";
 
-            using (SqlConnection connection = Conexao.SqlConnection())
+            SqlParameter[] parameters =
             {
-                using (SqlDataReader reader = Conexao.ExecuteReader(queryString, connection))
+                new SqlParameter{ ParameterName = "@status", Value = status},
+                new SqlParameter{ ParameterName = "@codigoProduto", Value = codigoProduto}
+            };
+
+            using (SqlConnection connection = _conexao.SqlConnection())
+            using (IDataReader reader = _conexao.ExecuteReader(queryString, parameters, connection))
+            {
+                while (reader.Read())
                 {
-                    while (reader.Read())
-                    {
-                        yield return new Cosif(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetString(3));
-                    }
+                    yield return new Cosif(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetString(3));
                 }
             }
 

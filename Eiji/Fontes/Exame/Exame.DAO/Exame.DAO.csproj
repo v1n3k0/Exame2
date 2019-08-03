@@ -49,7 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Conexao.cs" />
+    <Compile Include="Banco\Conexao.cs" />
+    <Compile Include="Interface\Banco\IConexao.cs" />
     <Compile Include="Interface\Repositorio\ICosifRepositorio.cs" />
     <Compile Include="Interface\Repositorio\IMovimentoRepositorio.cs" />
     <Compile Include="Interface\Repositorio\IProdutoRepositorio.cs" />
