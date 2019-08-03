@@ -96,3 +96,6 @@ Eiji/Fontes/Exame/Exame.Web/bin/AutoMapper.xml
 Eiji/Fontes/Exame/Exame.Web/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 *.cache
 Eiji/Fontes/Exame/Exame.Web/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+Eiji/Fontes/Exame/Exame.Web/bin/SimpleInjector.Integration.Web.Mvc.xml
+Eiji/Fontes/Exame/Exame.Web/bin/SimpleInjector.Integration.Web.xml
+Eiji/Fontes/Exame/Exame.Web/bin/SimpleInjector.xml
