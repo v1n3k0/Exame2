@@ -1,7 +1,6 @@
-﻿using Exame.VO;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Exame.DAO.Interface.Repositorio
+namespace Exame.VO.Interface.Repositorio
 {
     public interface ICosifRepositorio
     {

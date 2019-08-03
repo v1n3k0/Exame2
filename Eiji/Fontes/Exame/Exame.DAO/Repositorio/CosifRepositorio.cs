@@ -1,6 +1,6 @@
-﻿using Exame.DAO.Interface;
-using Exame.DAO.Interface.Repositorio;
-using Exame.VO;
+﻿using Exame.VO;
+using Exame.VO.Interface.Banco;
+using Exame.VO.Interface.Repositorio;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;

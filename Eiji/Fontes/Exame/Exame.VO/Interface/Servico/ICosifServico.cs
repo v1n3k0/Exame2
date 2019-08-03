@@ -1,7 +1,6 @@
-﻿using Exame.VO;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace Exame.BO.Interface.Servico
+namespace Exame.VO.Interface.Servico
 {
     public interface ICosifServico
     {

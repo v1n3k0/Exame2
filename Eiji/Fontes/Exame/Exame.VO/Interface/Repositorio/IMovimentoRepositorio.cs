@@ -1,8 +1,7 @@
-﻿using Exame.VO;
-using Exame.VO.Entidade.Procedure;
+﻿using Exame.VO.Entidade.Procedure;
 using System.Collections.Generic;
 
-namespace Exame.DAO.Interface.Repositorio
+namespace Exame.VO.Interface.Repositorio
 {
     public interface IMovimentoRepositorio
     {

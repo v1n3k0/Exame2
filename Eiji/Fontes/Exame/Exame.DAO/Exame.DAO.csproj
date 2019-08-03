@@ -50,10 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Banco\Conexao.cs" />
-    <Compile Include="Interface\Banco\IConexao.cs" />
-    <Compile Include="Interface\Repositorio\ICosifRepositorio.cs" />
-    <Compile Include="Interface\Repositorio\IMovimentoRepositorio.cs" />
-    <Compile Include="Interface\Repositorio\IProdutoRepositorio.cs" />
     <Compile Include="Repositorio\CosifRepositorio.cs" />
     <Compile Include="Repositorio\MovimentoRepositorio.cs" />
     <Compile Include="Repositorio\ProdutoRepositorio.cs" />

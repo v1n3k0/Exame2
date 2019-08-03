@@ -1,8 +1,8 @@
-﻿using Exame.DAO.Interface;
-using System;
+﻿using System;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using Exame.VO.Interface.Banco;
 
 namespace Exame.DAO
 {

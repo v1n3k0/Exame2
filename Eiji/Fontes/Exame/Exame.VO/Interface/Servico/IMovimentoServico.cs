@@ -1,7 +1,7 @@
 ﻿using Exame.VO.Entidade.Procedure;
 using System.Collections.Generic;
 
-namespace Exame.BO.Interface.Servico
+namespace Exame.VO.Interface.Servico
 {
     public interface IMovimentoServico
     {

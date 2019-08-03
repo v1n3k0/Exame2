@@ -1,7 +1,7 @@
-﻿using Exame.BO.Interface.Servico;
-using Exame.DAO.Interface.Repositorio;
-using Exame.DAO.Repositorio;
+﻿using Exame.DAO.Repositorio;
 using Exame.VO;
+using Exame.VO.Interface.Repositorio;
+using Exame.VO.Interface.Servico;
 using System.Collections.Generic;
 
 namespace Exame.BO.Servico

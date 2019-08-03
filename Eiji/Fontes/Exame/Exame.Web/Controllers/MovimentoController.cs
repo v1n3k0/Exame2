@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Exame.BO.Interface.Servico;
 using Exame.BO.Servico;
 using Exame.VO;
 using Exame.VO.Entidade.Procedure;
+using Exame.VO.Interface.Servico;
 using Exame.Web.Models;
 using System.Collections.Generic;
 using System.Linq;

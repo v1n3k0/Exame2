@@ -1,9 +1,9 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 
-namespace Exame.DAO.Interface
+namespace Exame.VO.Interface.Banco
 {
-    interface IConexao
+    public interface IConexao
     {
         SqlConnection SqlConnection();
 

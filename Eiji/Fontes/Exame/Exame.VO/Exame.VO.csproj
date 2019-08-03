@@ -45,6 +45,13 @@
     <Compile Include="Entidade\Movimento.cs" />
     <Compile Include="Entidade\Procedure\MovimentoProduto.cs" />
     <Compile Include="Entidade\Produto.cs" />
+    <Compile Include="Interface\Banco\IConexao.cs" />
+    <Compile Include="Interface\Repositorio\ICosifRepositorio.cs" />
+    <Compile Include="Interface\Repositorio\IMovimentoRepositorio.cs" />
+    <Compile Include="Interface\Repositorio\IProdutoRepositorio.cs" />
+    <Compile Include="Interface\Servico\ICosifServico.cs" />
+    <Compile Include="Interface\Servico\IMovimentoServico.cs" />
+    <Compile Include="Interface\Servico\IProdutoServico.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
