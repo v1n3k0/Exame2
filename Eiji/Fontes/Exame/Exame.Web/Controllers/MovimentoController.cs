@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using Exame.BO.Servico;
-using Exame.VO;
-using Exame.VO.Entidade.Procedure;
+using Exame.VO.Argumento.Cosif;
+using Exame.VO.Argumento.Movimento;
+using Exame.VO.Argumento.Produto;
 using Exame.VO.Interface.Servico;
 using Exame.Web.Models;
 using System.Collections.Generic;
@@ -22,7 +23,8 @@ namespace Exame.Web.Controllers
         {
             MapperConfiguration ConfiguracaoMapper = new MapperConfiguration(cfg => 
             {
-                cfg.CreateMap<MovimentoProduto, MovimentoProdutoView>();
+                cfg.CreateMap<MovimentoProdutoResponse, MovimentoProdutoView>();
+                cfg.CreateMap<MovimentoView, AdicionarMovimentoRequest>();
             });
 
             ConfiguracaoMapper.AssertConfigurationIsValid();
@@ -35,9 +37,9 @@ namespace Exame.Web.Controllers
         {
             _logger.Info("Index [INICIO]");
             
-            IEnumerable<MovimentoProduto> movimentos = _movimentoServico.ListarMovimentosProduto();                     
+            IEnumerable<MovimentoProdutoResponse> movimentos = _movimentoServico.ListarMovimentosProduto();                     
 
-            IEnumerable<MovimentoProdutoView> movimentosProduto = _mapper.Map<IEnumerable<MovimentoProduto>, IEnumerable<MovimentoProdutoView>>(movimentos);
+            IEnumerable<MovimentoProdutoView> movimentosProduto = _mapper.Map<IEnumerable<MovimentoProdutoResponse>, IEnumerable<MovimentoProdutoView>>(movimentos);
 
             _logger.Info("Index [FIM]");
             return View(movimentosProduto);
@@ -60,13 +62,10 @@ namespace Exame.Web.Controllers
         {
             _logger.Info($"Create [INICIO]|movimentoView: {movimentoView}");
 
-            bool resultado = _movimentoServico.Adicionar(
-                movimentoView.Mes,
-                movimentoView.Ano,
-                movimentoView.CodigoProduto,
-                movimentoView.CodigoCosif,
-                movimentoView.Valor,
-                movimentoView.Descricao);
+            AdicionarMovimentoRequest adicionarMovimentoRequest = 
+                _mapper.Map<MovimentoView, AdicionarMovimentoRequest>(movimentoView);
+
+            bool resultado = _movimentoServico.Adicionar(adicionarMovimentoRequest);
 
             if (resultado)
             {
@@ -87,7 +86,7 @@ namespace Exame.Web.Controllers
         {
             _logger.Info($"GetCosifs [INICIO]|codigoProduto: {codigoProduto}");
 
-            IEnumerable<Cosif> cosifs = _cosifServico.ListarAtivoPorProduto(codigoProduto);
+            IEnumerable<CosifResponse> cosifs = _cosifServico.ListarAtivoPorProduto(codigoProduto);
 
             var cosifsList = new SelectList(
                 cosifs.Select(x => new
@@ -109,7 +108,7 @@ namespace Exame.Web.Controllers
         {
             _logger.Info("ListarProduto [INICIO]");
 
-            IEnumerable<Produto> produtos = _produtoServico.ListarAtivo();
+            IEnumerable<ProdutoResponse> produtos = _produtoServico.ListarAtivo();
 
             ViewBag.Produtos = new SelectList(
                 produtos.OrderBy(x => x.Descricao),

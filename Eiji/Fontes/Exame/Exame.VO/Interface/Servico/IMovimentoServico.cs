@@ -1,13 +1,12 @@
-﻿using Exame.VO.Entidade.Procedure;
+﻿using Exame.VO.Argumento.Movimento;
 using System.Collections.Generic;
 
 namespace Exame.VO.Interface.Servico
 {
     public interface IMovimentoServico
     {
-        IEnumerable<MovimentoProduto> ListarMovimentosProduto();
+        IEnumerable<MovimentoProdutoResponse> ListarMovimentosProduto();
 
-        bool Adicionar(int mes, int ano, int codigoProduto, int codigoCosif, int valor,
-            string descricao);
+        bool Adicionar(AdicionarMovimentoRequest adicionarMovimentoRequest);
     }
 }

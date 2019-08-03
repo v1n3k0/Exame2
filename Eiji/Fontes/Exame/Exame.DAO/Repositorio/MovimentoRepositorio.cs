@@ -33,8 +33,8 @@ namespace Exame.DAO.Repositorio
 
             SqlParameter[] parameters =
             {
-                new SqlParameter{ParameterName = "@mes", Value = movimento.Ano},
-                new SqlParameter{ParameterName = "@ano", Value = movimento.Mes},
+                new SqlParameter{ParameterName = "@mes", Value = movimento.Mes},
+                new SqlParameter{ParameterName = "@ano", Value = movimento.Ano},
                 new SqlParameter{ParameterName = "@numeroLancamento", Value = movimento.NumeroLancamento},
                 new SqlParameter{ParameterName = "@codigoProduto", Value = movimento.CodigoProduto},
                 new SqlParameter{ParameterName = "@codigoCosif", Value = movimento.CodigoCosif},

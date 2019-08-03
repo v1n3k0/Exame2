@@ -41,6 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Argumento\Cosif\CosifResponse.cs" />
+    <Compile Include="Argumento\Movimento\AdicionarMovimentoRequest.cs" />
+    <Compile Include="Argumento\Movimento\MovimentoProdutoResponse.cs" />
+    <Compile Include="Argumento\Produto\ProdutoResponse.cs" />
     <Compile Include="Entidade\Cosif.cs" />
     <Compile Include="Entidade\Movimento.cs" />
     <Compile Include="Entidade\Procedure\MovimentoProduto.cs" />

@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Exame.VO.Argumento.Cosif;
+using System.Collections.Generic;
 
 namespace Exame.VO.Interface.Servico
 {
     public interface ICosifServico
     {
-        IEnumerable<Cosif> ListarAtivoPorProduto(int codigoProduto);
+        IEnumerable<CosifResponse> ListarAtivoPorProduto(int codigoProduto);
     }
 }
