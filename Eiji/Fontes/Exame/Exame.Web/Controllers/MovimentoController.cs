@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Exame.BO.Servico;
 using Exame.VO.Argumento.Cosif;
 using Exame.VO.Argumento.Movimento;
 using Exame.VO.Argumento.Produto;
@@ -13,14 +12,18 @@ namespace Exame.Web.Controllers
 {
     public class MovimentoController : Controller
     {
-        private readonly IProdutoServico _produtoServico = new ProdutoServico();
-        private readonly ICosifServico _cosifServico = new CosifServico();
-        private readonly IMovimentoServico _movimentoServico = new MovimentoServico();
+        private readonly IProdutoServico _produtoServico;
+        private readonly ICosifServico _cosifServico;
+        private readonly IMovimentoServico _movimentoServico;
         private readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
         private readonly IMapper _mapper;
 
-        public MovimentoController()
+        public MovimentoController(IProdutoServico produtoServico, ICosifServico cosifServico, IMovimentoServico movimentoServico)
         {
+            _produtoServico = produtoServico;
+            _cosifServico = cosifServico;
+            _movimentoServico = movimentoServico;
+
             MapperConfiguration ConfiguracaoMapper = new MapperConfiguration(cfg => 
             {
                 cfg.CreateMap<MovimentoProdutoResponse, MovimentoProdutoView>();

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Exame.DAO.Repositorio;
 using Exame.VO;
 using Exame.VO.Argumento.Movimento;
 using Exame.VO.Entidade.Procedure;
@@ -11,12 +10,14 @@ namespace Exame.BO.Servico
 {
     public class MovimentoServico : IMovimentoServico
     {
-        private readonly IMovimentoRepositorio _repoMovimento = new MovimentoRepositorio();
+        private readonly IMovimentoRepositorio _repoMovimento;
         private readonly IMapper _mapper;
         private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
-        public MovimentoServico()
+        public MovimentoServico(IMovimentoRepositorio movimentoRepositorio)
         {
+            _repoMovimento = movimentoRepositorio;
+
             MapperConfiguration ConfiguracaoMapper = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<MovimentoProduto, MovimentoProdutoResponse>();
@@ -26,6 +27,10 @@ namespace Exame.BO.Servico
             _mapper = ConfiguracaoMapper.CreateMapper();
         }
 
+        /// <summary>
+        /// Listar MovimentoProduto
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<MovimentoProdutoResponse> ListarMovimentosProduto()
         {
             _logger.Info("ListarMovimentosProduto [INICIO]");
@@ -38,6 +43,11 @@ namespace Exame.BO.Servico
             return movimentosProdutoResponse;
         }
 
+        /// <summary>
+        /// Salvar Movimento
+        /// </summary>
+        /// <param name="adicionarMovimentoRequest">Dados do Movimento a ser salvo</param>
+        /// <returns></returns>
         public bool Adicionar(AdicionarMovimentoRequest adicionarMovimentoRequest)
         {
             _logger.Info("Adicionar [INICIO]");
@@ -61,6 +71,12 @@ namespace Exame.BO.Servico
             return resultado;
         }
 
+        /// <summary>
+        /// Gerar novo Numero de lançamento
+        /// </summary>
+        /// <param name="mes">Mes do Movimento</param>
+        /// <param name="ano">Ano do Movimento</param>
+        /// <returns></returns>
         private int GerarNumeroLancamento(int mes, int ano)
         {
             _logger.Info($"GerarNumeroLancamento [INICIO]|mes: {mes}, ano: {ano}");

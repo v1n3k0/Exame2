@@ -14,9 +14,19 @@ namespace Exame.DAO.Repositorio
         private const string DESCRICAO = "DES_PRODUTO";
         private const string STATUS = "STA_STATUS";
 
-        private readonly IConexao _conexao = new Conexao();
+        private readonly IConexao _conexao;
         private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
+        public ProdutoRepositorio(IConexao conexao)
+        {
+            _conexao = conexao;
+        }
+
+        /// <summary>
+        /// Recuperar Produto por status
+        /// </summary>
+        /// <param name="status">Status do Produto</param>
+        /// <returns></returns>
         public IEnumerable<Produto> ListarPorStatus(string status)
         {
             _logger.Info($"ListarPorStatus [INICIO] | status: {status}");

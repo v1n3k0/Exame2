@@ -11,6 +11,10 @@ namespace Exame.DAO
         private readonly string _connectionString = ConfigurationManager.ConnectionStrings["ExameConnetionString"].ConnectionString;
         private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
+        /// <summary>
+        /// Configurar conexão
+        /// </summary>
+        /// <returns></returns>
         public SqlConnection SqlConnection()
         {
             _logger.Info("SqlConnection [INICIO]");
@@ -21,6 +25,13 @@ namespace Exame.DAO
             return connection;
         }
 
+        /// <summary>
+        /// Executar instrução SQL que não retornam dados
+        /// </summary>
+        /// <param name="queryString">Instrução</param>
+        /// <param name="parameters">Parametros da instrução</param>
+        /// <param name="connection">Conexão do banco de dados</param>
+        /// <returns></returns>
         public int ExecuteNonQuery(string queryString, SqlParameter[] parameters, SqlConnection connection)
         {
             _logger.Info($"ExecuteNonQuery [INICIO]|queryString: {queryString}");
@@ -43,6 +54,12 @@ namespace Exame.DAO
             return resultadoNonQuery;
         }
 
+        /// <summary>
+        /// Instrução SQL que retorna um IDataReader
+        /// </summary>
+        /// <param name="queryString">Instrução</param>
+        /// <param name="connection">Conexão do banco de dados</param>
+        /// <returns></returns>
         public IDataReader ExecuteReader(string queryString, SqlConnection connection)
         {
             _logger.Info($"ExecuteReader [INICIO]|queryString: {queryString}");
@@ -64,6 +81,13 @@ namespace Exame.DAO
             return reader;
         }
 
+        /// <summary>
+        /// Instrução SQL que retorna um IDataReader
+        /// </summary>
+        /// <param name="queryString">Instrução</param>
+        /// <param name="parameters">Parametros da instrução</param>
+        /// <param name="connection">Conexão do banco de dados</param>
+        /// <returns></returns>
         public IDataReader ExecuteReader(string queryString, SqlParameter[] parameters, SqlConnection connection)
         {
             _logger.Info($"ExecuteReader [INICIO]|queryString: {queryString}");
@@ -86,6 +110,13 @@ namespace Exame.DAO
             return reader;
         }
 
+        /// <summary>
+        /// Executar instrução SQL utilizando funções agregadas
+        /// </summary>
+        /// <param name="queryString">Instrução</param>
+        /// <param name="parameters">Parametros da instrução</param>
+        /// <param name="connection">Conexão do banco de dados</param>
+        /// <returns></returns>
         public object ExecuteScalar(string queryString, SqlParameter[] parameters, SqlConnection connection)
         {
             _logger.Info($"ExecuteScalar [INICIO]|queryString: {queryString}");

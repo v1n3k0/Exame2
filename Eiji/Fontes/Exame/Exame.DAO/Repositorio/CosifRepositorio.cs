@@ -15,9 +15,20 @@ namespace Exame.DAO.Repositorio
         private const string CLASSIFICACAO = "COD_CLASSIFICACAO";
         private const string STATUS = "STA_STATUS";
 
-        private readonly IConexao _conexao = new Conexao();
+        private readonly IConexao _conexao;
         private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
+        public CosifRepositorio(IConexao conexao)
+        {
+            _conexao = conexao;
+        }
+
+        /// <summary>
+        /// Recuperar Cosif por status e produto
+        /// </summary>
+        /// <param name="status">Status do Cosif</param>
+        /// <param name="codigoProduto">Codigo do Produto</param>
+        /// <returns></returns>
         public IEnumerable<Cosif> ListarPorStatusPorProduto(string status, int codigoProduto)
         {
             _logger.Info($"ListarPorStatusPorProduto [INICIO] | status:{status}");

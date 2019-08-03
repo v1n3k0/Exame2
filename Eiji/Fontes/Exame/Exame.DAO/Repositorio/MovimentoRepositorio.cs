@@ -21,9 +21,19 @@ namespace Exame.DAO.Repositorio
         private const string DATAMOVIMENTO = "DAT_MOVIMENTO";
         private const string CODIGOUSUARIO = "COD_USUARIO";
 
-        private readonly IConexao _conexao = new Conexao();
+        private readonly IConexao _conexao;
         private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
+        public MovimentoRepositorio(IConexao conexao)
+        {
+            _conexao = conexao;
+        }
+
+        /// <summary>
+        /// Inserir movimento
+        /// </summary>
+        /// <param name="movimento">Objeto a ser persistido</param>
+        /// <returns></returns>
         public bool Adicionar(Movimento movimento)
         {
             _logger.Info("Adicionar [INICIO]");
@@ -55,6 +65,10 @@ namespace Exame.DAO.Repositorio
             return resultado;
         }
 
+        /// <summary>
+        /// Recuperar MovimentoProduto na procedure ListarMovimentoProduto
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<MovimentoProduto> ListarMovimentoProduto()
         {
             _logger.Info("ListarMovimentoProduto [INICIO]");
@@ -82,6 +96,12 @@ namespace Exame.DAO.Repositorio
             _logger.Info("ListarMovimentoProduto [FIM]");
         }
 
+        /// <summary>
+        /// Recuperar valor maximo do numero de lançamento
+        /// </summary>
+        /// <param name="mes">Mes do Movimento</param>
+        /// <param name="ano">Ano do Movimento</param>
+        /// <returns></returns>
         public int MaximoNumeroLancamento(int mes, int ano)
         {
             _logger.Info($"MaximoNumeroLancamento [INICIO] | mes: {mes}, ano {ano}");

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Exame.DAO.Repositorio;
 using Exame.VO;
 using Exame.VO.Argumento.Produto;
 using Exame.VO.Interface.Repositorio;
@@ -10,12 +9,14 @@ namespace Exame.BO.Servico
 {
     public class ProdutoServico : IProdutoServico
     {
-        private readonly IProdutoRepositorio _repoProduto = new ProdutoRepositorio();
+        private readonly IProdutoRepositorio _repoProduto;
         private readonly IMapper _mapper;
         private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
-        public ProdutoServico()
+        public ProdutoServico(IProdutoRepositorio produtoRepositorio)
         {
+            _repoProduto = produtoRepositorio;
+
             MapperConfiguration ConfiguracaoMapper = new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<Produto, ProdutoResponse>();
@@ -25,6 +26,10 @@ namespace Exame.BO.Servico
             _mapper = ConfiguracaoMapper.CreateMapper();
         }
 
+        /// <summary>
+        /// Listar Produto pelo status ativo
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<ProdutoResponse> ListarAtivo()
         {
             _logger.Info("ListarAtivo [INICIO]");
