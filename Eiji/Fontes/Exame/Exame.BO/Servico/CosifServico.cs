@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Exame.BO.Mappers;
 using Exame.VO;
 using Exame.VO.Argumento.Cosif;
 using Exame.VO.Interface.Repositorio;
@@ -16,14 +17,7 @@ namespace Exame.BO.Servico
         public CosifServico(ICosifRepositorio cosifRepositorio)
         {
             _repoCosif = cosifRepositorio;
-
-            MapperConfiguration ConfiguracaoMapper = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Cosif, CosifResponse>();
-            });
-
-            ConfiguracaoMapper.AssertConfigurationIsValid();
-            _mapper = ConfiguracaoMapper.CreateMapper();
+            _mapper = AutoMapperServiceConfig.Mapper;
         }
 
         /// <summary>
@@ -36,7 +30,7 @@ namespace Exame.BO.Servico
             _logger.Info($"ListarAtivoPorProduto [INICIO]|codigoProduto: {codigoProduto}");
 
             IEnumerable<Cosif> cosifs = _repoCosif.ListarPorStatusPorProduto("A", codigoProduto);
-            IEnumerable<CosifResponse> cosifsResponse = _mapper.Map<IEnumerable<Cosif>, IEnumerable<CosifResponse>>(cosifs);
+            IEnumerable<CosifResponse> cosifsResponse = _mapper.Map<IEnumerable<CosifResponse>>(cosifs);
 
             _logger.Info("ListarAtivoPorProduto [FIM]");
             return cosifsResponse;

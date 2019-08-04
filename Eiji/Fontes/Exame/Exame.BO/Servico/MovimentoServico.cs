@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Exame.BO.Mappers;
 using Exame.VO;
 using Exame.VO.Argumento.Movimento;
 using Exame.VO.Entidade.Procedure;
@@ -17,14 +18,7 @@ namespace Exame.BO.Servico
         public MovimentoServico(IMovimentoRepositorio movimentoRepositorio)
         {
             _repoMovimento = movimentoRepositorio;
-
-            MapperConfiguration ConfiguracaoMapper = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<MovimentoProduto, MovimentoProdutoResponse>();
-            });
-
-            ConfiguracaoMapper.AssertConfigurationIsValid();
-            _mapper = ConfiguracaoMapper.CreateMapper();
+            _mapper = AutoMapperServiceConfig.Mapper;
         }
 
         /// <summary>
@@ -37,7 +31,7 @@ namespace Exame.BO.Servico
 
             IEnumerable<MovimentoProduto> movimentosProduto = _repoMovimento.ListarMovimentoProduto();
             IEnumerable<MovimentoProdutoResponse> movimentosProdutoResponse = 
-                _mapper.Map<IEnumerable<MovimentoProduto>, IEnumerable<MovimentoProdutoResponse>>(movimentosProduto);
+                _mapper.Map<IEnumerable<MovimentoProdutoResponse>>(movimentosProduto);
 
             _logger.Info("ListarMovimentosProduto [FIM]");
             return movimentosProdutoResponse;

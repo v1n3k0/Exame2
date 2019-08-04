@@ -3,6 +3,7 @@ using Exame.VO.Argumento.Cosif;
 using Exame.VO.Argumento.Movimento;
 using Exame.VO.Argumento.Produto;
 using Exame.VO.Interface.Servico;
+using Exame.Web.App_Start;
 using Exame.Web.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,15 +24,7 @@ namespace Exame.Web.Controllers
             _produtoServico = produtoServico;
             _cosifServico = cosifServico;
             _movimentoServico = movimentoServico;
-
-            MapperConfiguration ConfiguracaoMapper = new MapperConfiguration(cfg => 
-            {
-                cfg.CreateMap<MovimentoProdutoResponse, MovimentoProdutoView>();
-                cfg.CreateMap<MovimentoView, AdicionarMovimentoRequest>();
-            });
-
-            ConfiguracaoMapper.AssertConfigurationIsValid();
-            _mapper = ConfiguracaoMapper.CreateMapper();
+            _mapper = AutoMapperConfig.Mapper;
         }
 
         // GET: Movimento

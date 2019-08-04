@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Exame.BO.Mappers;
 using Exame.VO;
 using Exame.VO.Argumento.Produto;
 using Exame.VO.Interface.Repositorio;
@@ -16,14 +17,7 @@ namespace Exame.BO.Servico
         public ProdutoServico(IProdutoRepositorio produtoRepositorio)
         {
             _repoProduto = produtoRepositorio;
-
-            MapperConfiguration ConfiguracaoMapper = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Produto, ProdutoResponse>();
-            });
-
-            ConfiguracaoMapper.AssertConfigurationIsValid();
-            _mapper = ConfiguracaoMapper.CreateMapper();
+            _mapper = AutoMapperServiceConfig.Mapper;
         }
 
         /// <summary>
@@ -35,7 +29,7 @@ namespace Exame.BO.Servico
             _logger.Info("ListarAtivo [INICIO]");
 
             IEnumerable<Produto> produtos = _repoProduto.ListarPorStatus("A");
-            IEnumerable<ProdutoResponse> produtosResponse = _mapper.Map<IEnumerable<Produto>, IEnumerable<ProdutoResponse>>(produtos);
+            IEnumerable<ProdutoResponse> produtosResponse = _mapper.Map<IEnumerable<ProdutoResponse>>(produtos);
 
             _logger.Info("ListarAtivo [FIM]");
             return produtosResponse;

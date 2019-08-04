@@ -136,6 +136,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -144,6 +145,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mappers\ValueObjectToViewModelMappingProfile.cs" />
+    <Compile Include="Mappers\ViewModelToValueObjectMappingProfile.cs" />
     <Compile Include="Models\CosifView.cs" />
     <Compile Include="Models\MovimentoProdutoView.cs" />
     <Compile Include="Models\MovimentoView.cs" />

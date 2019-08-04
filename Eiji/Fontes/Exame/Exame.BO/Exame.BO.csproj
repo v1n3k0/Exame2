@@ -52,6 +52,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mappers\AutoMapperServiceConfig.cs" />
+    <Compile Include="Mappers\EntityToArgumentMappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servico\CosifServico.cs" />
     <Compile Include="Servico\MovimentoServico.cs" />
