@@ -8,7 +8,6 @@ namespace Exame.DAO
 {
     public class Conexao: IConexao
     {
-        private readonly string _connectionString = ConfigurationManager.ConnectionStrings["ExameConnetionString"].ConnectionString;
         private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
         /// <summary>
@@ -19,10 +18,21 @@ namespace Exame.DAO
         {
             _logger.Info("SqlConnection [INICIO]");
 
-            SqlConnection connection = new SqlConnection(_connectionString);
+            SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["ExameConnetionString"].ConnectionString);
 
             _logger.Info("SqlConnection [FIM]");
             return connection;
+        }
+
+        /// <summary>
+        /// Executar instrução SQL que não retornam dados
+        /// </summary>
+        /// <param name="queryString">Instrução</param>
+        /// <param name="connection">Conexão do banco de dados</param>
+        /// <returns></returns>
+        public int ExecuteNonQuery(string queryString, SqlConnection connection)
+        {
+            return ExecuteNonQuery(queryString, null, connection);
         }
 
         /// <summary>
@@ -37,7 +47,7 @@ namespace Exame.DAO
             _logger.Info($"ExecuteNonQuery [INICIO]|queryString: {queryString}");
 
             var command = new SqlCommand(queryString, connection);
-            command.Parameters.AddRange(parameters);
+            if(parameters != null) command.Parameters.AddRange(parameters);
             int resultadoNonQuery = 0;
 
             try
@@ -62,23 +72,7 @@ namespace Exame.DAO
         /// <returns></returns>
         public IDataReader ExecuteReader(string queryString, SqlConnection connection)
         {
-            _logger.Info($"ExecuteReader [INICIO]|queryString: {queryString}");
-
-            var command = new SqlCommand(queryString, connection);
-            IDataReader reader = null;
-
-            try
-            {
-                connection.Open();
-                reader = command.ExecuteReader();
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex, "ExecuteReader: ");
-            }
-
-            _logger.Info("ExecuteReader [FIM]");
-            return reader;
+            return ExecuteReader(queryString, null, connection);
         }
 
         /// <summary>
@@ -93,7 +87,7 @@ namespace Exame.DAO
             _logger.Info($"ExecuteReader [INICIO]|queryString: {queryString}");
 
             var command = new SqlCommand(queryString, connection);
-            command.Parameters.AddRange(parameters);
+            if(parameters != null) command.Parameters.AddRange(parameters);
             IDataReader reader = null;
 
             try
@@ -114,6 +108,17 @@ namespace Exame.DAO
         /// Executar instrução SQL utilizando funções agregadas
         /// </summary>
         /// <param name="queryString">Instrução</param>
+        /// <param name="connection">Conexão do banco de dados</param>
+        /// <returns></returns>
+        public object ExecuteScalar(string queryString, SqlConnection connection)
+        {
+            return ExecuteScalar(queryString, null, connection);
+        }
+
+        /// <summary>
+        /// Executar instrução SQL utilizando funções agregadas
+        /// </summary>
+        /// <param name="queryString">Instrução</param>
         /// <param name="parameters">Parametros da instrução</param>
         /// <param name="connection">Conexão do banco de dados</param>
         /// <returns></returns>
@@ -122,7 +127,7 @@ namespace Exame.DAO
             _logger.Info($"ExecuteScalar [INICIO]|queryString: {queryString}");
 
             var command = new SqlCommand(queryString, connection);
-            command.Parameters.AddRange(parameters);
+            if(parameters != null) command.Parameters.AddRange(parameters);
             object scalar = null;
 
             try

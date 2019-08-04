@@ -33,8 +33,7 @@ namespace Exame.Web.Controllers
         {
             _logger.Info("Index [INICIO]");
             
-            IEnumerable<MovimentoProdutoResponse> movimentos = _movimentoServico.ListarMovimentosProduto();                     
-
+            IEnumerable<MovimentoProdutoResponse> movimentos = _movimentoServico.ListarMovimentosProduto();
             IEnumerable<MovimentoProdutoView> movimentosProduto = _mapper.Map<IEnumerable<MovimentoProdutoResponse>, IEnumerable<MovimentoProdutoView>>(movimentos);
 
             _logger.Info("Index [FIM]");

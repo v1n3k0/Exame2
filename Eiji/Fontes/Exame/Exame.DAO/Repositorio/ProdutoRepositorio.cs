@@ -43,7 +43,11 @@ namespace Exame.DAO.Repositorio
             {
                 while (reader.Read())
                 {
-                    yield return new Produto(reader.GetInt32(0), reader.GetString(1), reader.GetString(2));
+                    yield return new Produto(
+                        reader.GetInt32(reader.GetOrdinal(CODIGO)), 
+                        reader.GetString(reader.GetOrdinal(DESCRICAO)), 
+                        reader.GetString(reader.GetOrdinal(STATUS))
+                        );
                 }
             }
 

@@ -20,14 +20,12 @@ namespace Exame.DAO.Repositorio
         private const string DESCRICAO = "DES_DESCRICAO";
         private const string DATAMOVIMENTO = "DAT_MOVIMENTO";
         private const string CODIGOUSUARIO = "COD_USUARIO";
+        private const string DESCRICAOPRODUTO = "DES_PRODUTO";
 
         private readonly IConexao _conexao;
         private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
-        public MovimentoRepositorio(IConexao conexao)
-        {
-            _conexao = conexao;
-        }
+        public MovimentoRepositorio(IConexao conexao) => _conexao = conexao;
 
         /// <summary>
         /// Inserir movimento
@@ -57,7 +55,6 @@ namespace Exame.DAO.Repositorio
             using (SqlConnection connection = _conexao.SqlConnection())
             {
                 int resultadoNonQuery = _conexao.ExecuteNonQuery(queryString, parameters, connection);
-
                 resultado = resultadoNonQuery > 0;
             }
 
@@ -79,18 +76,16 @@ namespace Exame.DAO.Repositorio
             {
                 while (reader.Read())
                 {
-                    yield return
-                        new MovimentoProduto(
-                            reader.GetInt32(0),
-                            reader.GetInt32(1),
-                            reader.GetInt32(2),
-                            reader.GetString(3),
-                            reader.GetInt32(4),
-                            reader.GetString(5),
-                            reader.GetInt32(6)
+                    yield return new MovimentoProduto(
+                            reader.GetInt32(reader.GetOrdinal(MES)),
+                            reader.GetInt32(reader.GetOrdinal(ANO)),
+                            reader.GetInt32(reader.GetOrdinal(CODIGOPRODUTO)),
+                            reader.GetString(reader.GetOrdinal(DESCRICAOPRODUTO)),
+                            reader.GetInt32(reader.GetOrdinal(NUMEROLANCAMENTO)),
+                            reader.GetString(reader.GetOrdinal(DESCRICAO)),
+                            reader.GetInt32(reader.GetOrdinal(VALOR))
                         );
                 }
-
             }
 
             _logger.Info("ListarMovimentoProduto [FIM]");
@@ -118,7 +113,6 @@ namespace Exame.DAO.Repositorio
             using (SqlConnection connection = _conexao.SqlConnection())
             {
                 object scalar = _conexao.ExecuteScalar(queryString, parameters, connection);
-
                 numeroLancamento = (int)scalar;
             }
 

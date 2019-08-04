@@ -18,10 +18,7 @@ namespace Exame.DAO.Repositorio
         private readonly IConexao _conexao;
         private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
-        public CosifRepositorio(IConexao conexao)
-        {
-            _conexao = conexao;
-        }
+        public CosifRepositorio(IConexao conexao) => _conexao = conexao;
 
         /// <summary>
         /// Recuperar Cosif por status e produto
@@ -31,7 +28,7 @@ namespace Exame.DAO.Repositorio
         /// <returns></returns>
         public IEnumerable<Cosif> ListarPorStatusPorProduto(string status, int codigoProduto)
         {
-            _logger.Info($"ListarPorStatusPorProduto [INICIO] | status:{status}");
+            _logger.Info($"ListarPorStatusPorProduto [INICIO] | status:{status}, codigoProduto: {codigoProduto}");
 
             string queryString = $"SELECT {CODIGO},{CODIGOPRODUTO},{CLASSIFICACAO},{STATUS} from {TABELA} WHERE {STATUS} like @status AND {CODIGOPRODUTO} = @codigoProduto";
 
@@ -46,7 +43,12 @@ namespace Exame.DAO.Repositorio
             {
                 while (reader.Read())
                 {
-                    yield return new Cosif(reader.GetInt32(0), reader.GetInt32(1), reader.GetString(2), reader.GetString(3));
+                    yield return new Cosif(
+                        reader.GetInt32(reader.GetOrdinal(CODIGO)), 
+                        reader.GetInt32(reader.GetOrdinal(CODIGOPRODUTO)), 
+                        reader.GetString(reader.GetOrdinal(CLASSIFICACAO)), 
+                        reader.GetString(reader.GetOrdinal(STATUS))
+                        );
                 }
             }
 
