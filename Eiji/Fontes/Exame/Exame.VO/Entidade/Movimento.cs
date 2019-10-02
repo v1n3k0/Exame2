@@ -1,31 +1,28 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace Exame.VO
 {
+    [DataContract]
     public class Movimento
     {
-        public int Mes { get; private set; }
-        public int Ano { get; private set; }
-        public int NumeroLancamento { get; private set; }
-        public int CodigoProduto { get; private set; }
-        public int CodigoCosif { get; private set; }
-        public int Valor { get; private set; }
-        public string Descricao { get; private set; }
-        public DateTime DataMovimento { get; private set; }
-        public string CodigoUsuario { get; private set; }
-
-        public Movimento(int mes, int ano, int numeroLancamento, int codigoProduto, int codigoCosif, int valor, 
-            string descricao, string codigoUsuario)
-        {
-            Mes = mes;
-            Ano = ano;
-            NumeroLancamento = numeroLancamento;
-            CodigoProduto = codigoProduto;
-            CodigoCosif = codigoCosif;
-            Valor = valor;
-            Descricao = descricao;
-            DataMovimento = DateTime.Now;
-            CodigoUsuario = codigoUsuario;
-        }
+        [DataMember]
+        public int Mes { get; set; }
+        [DataMember]
+        public int Ano { get; set; }
+        [DataMember]
+        public int NumeroLancamento { get; set; }
+        [DataMember]
+        public int CodigoProduto { get; set; }
+        [DataMember]
+        public int CodigoCosif { get; set; }
+        [DataMember]
+        public int Valor { get; set; }
+        [DataMember]
+        public string Descricao { get; set; }
+        [DataMember]
+        public DateTime DataMovimento { get; set; }
+        [DataMember]
+        public string CodigoUsuario { get; set; }
     }
 }

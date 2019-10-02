@@ -1,14 +1,11 @@
-﻿using Exame.VO;
-using Exame.VO.Entidade.Procedure;
-using Exame.VO.Interface.Banco;
-using Exame.VO.Interface.Repositorio;
-using System.Collections.Generic;
-using System.Data;
+﻿using Exame.DAO.Interface.Repositorio;
+using Exame.DAO.Repositorio.Base;
+using Exame.VO;
 using System.Data.SqlClient;
 
 namespace Exame.DAO.Repositorio
 {
-    public class MovimentoRepositorio : IMovimentoRepositorio
+    public class MovimentoRepositorio : BaseRepositorio, IMovimentoRepositorio
     {
         private const string TABELA = "MOVIMENTO_MANUAL";
         private const string MES = "DAT_MES";
@@ -20,75 +17,34 @@ namespace Exame.DAO.Repositorio
         private const string DESCRICAO = "DES_DESCRICAO";
         private const string DATAMOVIMENTO = "DAT_MOVIMENTO";
         private const string CODIGOUSUARIO = "COD_USUARIO";
-        private const string DESCRICAOPRODUTO = "DES_PRODUTO";
-
-        private readonly IConexao _conexao;
-        private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
-
-        public MovimentoRepositorio(IConexao conexao) => _conexao = conexao;
 
         /// <summary>
         /// Inserir movimento
         /// </summary>
         /// <param name="movimento">Objeto a ser persistido</param>
-        /// <returns></returns>
+        /// <returns>Resultado da execução</returns>
         public bool Adicionar(Movimento movimento)
         {
             _logger.Info("Adicionar [INICIO]");
 
-            var resultado = false;
             string queryString = $"INSERT INTO {TABELA} ({MES},{ANO},{NUMEROLANCAMENTO},{CODIGOPRODUTO},{CODIGOCOSIF},{VALOR},{DESCRICAO},{DATAMOVIMENTO},{CODIGOUSUARIO}) VALUES (@mes, @ano, @numeroLancamento, @codigoProduto, @codigoCosif, @valor, @descricao, @dataMovimento, @codigoUsuario)";
 
-            SqlParameter[] parameters =
-            {
-                new SqlParameter{ParameterName = "@mes", Value = movimento.Mes},
-                new SqlParameter{ParameterName = "@ano", Value = movimento.Ano},
-                new SqlParameter{ParameterName = "@numeroLancamento", Value = movimento.NumeroLancamento},
-                new SqlParameter{ParameterName = "@codigoProduto", Value = movimento.CodigoProduto},
-                new SqlParameter{ParameterName = "@codigoCosif", Value = movimento.CodigoCosif},
-                new SqlParameter{ParameterName = "@valor", Value = movimento.Valor},
-                new SqlParameter{ParameterName = "@descricao", Value = movimento.Descricao},
-                new SqlParameter{ParameterName = "@dataMovimento", Value = movimento.DataMovimento},
-                new SqlParameter{ParameterName = "@codigoUsuario", Value = movimento.CodigoUsuario},
-            };
+            int resultadoNonQuery = ExecuteNonQuery(queryString,
+                new SqlParameter { ParameterName = "@mes", Value = movimento.Mes },
+                new SqlParameter { ParameterName = "@ano", Value = movimento.Ano },
+                new SqlParameter { ParameterName = "@numeroLancamento", Value = movimento.NumeroLancamento },
+                new SqlParameter { ParameterName = "@codigoProduto", Value = movimento.CodigoProduto },
+                new SqlParameter { ParameterName = "@codigoCosif", Value = movimento.CodigoCosif },
+                new SqlParameter { ParameterName = "@valor", Value = movimento.Valor },
+                new SqlParameter { ParameterName = "@descricao", Value = movimento.Descricao },
+                new SqlParameter { ParameterName = "@dataMovimento", Value = movimento.DataMovimento },
+                new SqlParameter { ParameterName = "@codigoUsuario", Value = movimento.CodigoUsuario }
+                );
 
-            using (SqlConnection connection = _conexao.SqlConnection())
-            {
-                int resultadoNonQuery = _conexao.ExecuteNonQuery(queryString, parameters, connection);
-                resultado = resultadoNonQuery > 0;
-            }
+            bool resultado = resultadoNonQuery > 0;
 
             _logger.Info($"Adicionar [FIM]| resultado: {resultado}");
             return resultado;
-        }
-
-        /// <summary>
-        /// Recuperar MovimentoProduto na procedure ListarMovimentoProduto
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<MovimentoProduto> ListarMovimentoProduto()
-        {
-            _logger.Info("ListarMovimentoProduto [INICIO]");
-            string queryString = "ListarMovimentoProduto";
-
-            using (SqlConnection connection = _conexao.SqlConnection())
-            using (IDataReader reader = _conexao.ExecuteReader(queryString, connection))
-            {
-                while (reader.Read())
-                {
-                    yield return new MovimentoProduto(
-                            reader.GetInt32(reader.GetOrdinal(MES)),
-                            reader.GetInt32(reader.GetOrdinal(ANO)),
-                            reader.GetInt32(reader.GetOrdinal(CODIGOPRODUTO)),
-                            reader.GetString(reader.GetOrdinal(DESCRICAOPRODUTO)),
-                            reader.GetInt32(reader.GetOrdinal(NUMEROLANCAMENTO)),
-                            reader.GetString(reader.GetOrdinal(DESCRICAO)),
-                            reader.GetInt32(reader.GetOrdinal(VALOR))
-                        );
-                }
-            }
-
-            _logger.Info("ListarMovimentoProduto [FIM]");
         }
 
         /// <summary>
@@ -96,25 +52,19 @@ namespace Exame.DAO.Repositorio
         /// </summary>
         /// <param name="mes">Mes do Movimento</param>
         /// <param name="ano">Ano do Movimento</param>
-        /// <returns></returns>
+        /// <returns>Numero maximo do lançamento</returns>
         public int MaximoNumeroLancamento(int mes, int ano)
         {
             _logger.Info($"MaximoNumeroLancamento [INICIO] | mes: {mes}, ano {ano}");
 
-            var numeroLancamento = 1;
-            string queryString = $"SELECT ISNULL(MAX(NUM_LANCAMENTO), 0) FROM MOVIMENTO_MANUAL WHERE DAT_MES = @mes AND DAT_ANO = @ano";
+            string queryString = $"SELECT ISNULL(MAX({NUMEROLANCAMENTO}), 0) FROM {TABELA} WHERE {MES} = @mes AND {ANO} = @ano";
 
-            SqlParameter[] parameters =
-            {
-                new SqlParameter{ ParameterName = "@mes", Value = mes},
-                new SqlParameter{ ParameterName = "@ano", Value = ano}
-            };
+            object scalar = ExecuteScalar(queryString,
+                new SqlParameter { ParameterName = "@mes", Value = mes },
+                new SqlParameter { ParameterName = "@ano", Value = ano }
+                );
 
-            using (SqlConnection connection = _conexao.SqlConnection())
-            {
-                object scalar = _conexao.ExecuteScalar(queryString, parameters, connection);
-                numeroLancamento = (int)scalar;
-            }
+            var numeroLancamento = (int)scalar;
 
             _logger.Info($"MaximoNumeroLancamento [FIM]| numeroLancamento: {numeroLancamento}");
             return numeroLancamento;

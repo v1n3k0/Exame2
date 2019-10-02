@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AutoMapper, Version=8.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>..\packages\AutoMapper.8.1.1\lib\net461\AutoMapper.dll</HintPath>
-    </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.6.6\lib\net45\NLog.dll</HintPath>
     </Reference>
@@ -41,9 +38,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,8 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mappers\AutoMapperServiceConfig.cs" />
-    <Compile Include="Mappers\EntityToArgumentMappingProfile.cs" />
+    <Compile Include="Interface\Servico\ICosifServico.cs" />
+    <Compile Include="Interface\Servico\IMovimentoServico.cs" />
+    <Compile Include="Interface\Servico\IProdutoServico.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servico\CosifServico.cs" />
     <Compile Include="Servico\MovimentoServico.cs" />
@@ -63,6 +59,10 @@
     <ProjectReference Include="..\Exame.DAO\Exame.DAO.csproj">
       <Project>{8d467ae7-26a6-4cd4-8631-b03e55860251}</Project>
       <Name>Exame.DAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Exame.Help\Exame.Help.csproj">
+      <Project>{0BF81848-C7E2-4B4A-BB90-DC75B7863141}</Project>
+      <Name>Exame.Help</Name>
     </ProjectReference>
     <ProjectReference Include="..\Exame.VO\Exame.VO.csproj">
       <Project>{3ee14135-969c-4b9d-a8d6-36529df43711}</Project>

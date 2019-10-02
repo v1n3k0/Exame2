@@ -52,15 +52,6 @@
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.6.6\lib\net45\NLog.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector, Version=4.6.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleInjector.4.6.2\lib\net45\SimpleInjector.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleInjector.Integration.Web, Version=4.6.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleInjector.Integration.Web.4.6.2\lib\net40\SimpleInjector.Integration.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="SimpleInjector.Integration.Web.Mvc, Version=4.6.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\packages\SimpleInjector.Integration.Web.Mvc.4.6.2\lib\net40\SimpleInjector.Integration.Web.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -140,7 +131,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\SimpleInjectorConfig.cs" />
     <Compile Include="Controllers\MovimentoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -187,7 +177,7 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Movimento\Create.cshtml" />
-    <Content Include="Views\Movimento\Index.cshtml" />
+    <Content Include="Views\Movimento\ListarMovimentosProduto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -210,9 +200,13 @@
       <Project>{88d2d97f-4074-4866-b9d3-2e0fd21a8a92}</Project>
       <Name>Exame.BO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Exame.DAO\Exame.DAO.csproj">
-      <Project>{8D467AE7-26A6-4CD4-8631-B03E55860251}</Project>
-      <Name>Exame.DAO</Name>
+    <ProjectReference Include="..\Exame.Help\Exame.Help.csproj">
+      <Project>{0BF81848-C7E2-4B4A-BB90-DC75B7863141}</Project>
+      <Name>Exame.Help</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Exame.IoC\Exame.IoC.csproj">
+      <Project>{982CE9EA-270A-46A3-8AAB-151DBED477B0}</Project>
+      <Name>Exame.IoC</Name>
     </ProjectReference>
     <ProjectReference Include="..\Exame.VO\Exame.VO.csproj">
       <Project>{3ee14135-969c-4b9d-a8d6-36529df43711}</Project>

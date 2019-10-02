@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Exame.VO.Argumento.Cosif;
-using Exame.VO.Argumento.Movimento;
-using Exame.VO.Argumento.Produto;
-using Exame.VO.Interface.Servico;
+using Exame.BO.Interface.Servico;
+using Exame.Help.Extensao;
+using Exame.VO;
+using Exame.VO.Entidade.Procedure;
 using Exame.Web.App_Start;
 using Exame.Web.Models;
 using System.Collections.Generic;
@@ -19,7 +19,8 @@ namespace Exame.Web.Controllers
         private readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
         private readonly IMapper _mapper;
 
-        public MovimentoController(IProdutoServico produtoServico, ICosifServico cosifServico, IMovimentoServico movimentoServico)
+        public MovimentoController(IProdutoServico produtoServico, ICosifServico cosifServico, 
+            IMovimentoServico movimentoServico)
         {
             _produtoServico = produtoServico;
             _cosifServico = cosifServico;
@@ -27,91 +28,118 @@ namespace Exame.Web.Controllers
             _mapper = AutoMapperConfig.Mapper;
         }
 
-        // GET: Movimento
-        [HttpGet]
-        public ActionResult Index()
-        {
-            _logger.Info("Index [INICIO]");
-            
-            IEnumerable<MovimentoProdutoResponse> movimentos = _movimentoServico.ListarMovimentosProduto();
-            IEnumerable<MovimentoProdutoView> movimentosProduto = _mapper.Map<IEnumerable<MovimentoProdutoResponse>, IEnumerable<MovimentoProdutoView>>(movimentos);
-
-            _logger.Info("Index [FIM]");
-            return View(movimentosProduto);
-        }
-
         [HttpGet]
         public ActionResult Create()
         {
             _logger.Info("Create [INICIO]");
-            var movimento = new MovimentoView();
 
             ListarProduto();
 
             _logger.Info("Create [FIM]");
-            return View(movimento);
+            return View();
         }
 
         [HttpPost]
         public ActionResult Create(MovimentoView movimentoView)
         {
-            _logger.Info($"Create [INICIO]|movimentoView: {movimentoView}");
+            _logger.Info("Create [INICIO]|movimentoView: {0}", movimentoView.SerializarXML());
 
-            AdicionarMovimentoRequest adicionarMovimentoRequest = 
-                _mapper.Map<MovimentoView, AdicionarMovimentoRequest>(movimentoView);
+            Movimento adicionarMovimentoRequest = 
+                _mapper.Map<MovimentoView, Movimento>(movimentoView);
 
             bool resultado = _movimentoServico.Adicionar(adicionarMovimentoRequest);
 
             if (resultado)
             {
                 _logger.Info($"Create [FIM]|resultado: {resultado}");
-                return RedirectToAction("Index");
             }
             else
             {
                 ViewBag.Alerta = "Erro ao cadastrar movimento.";
+
                 ListarProduto();
-                _logger.Warn($"Create [FIM]|resultado: {resultado} Alerta: {ViewBag.Alerta}");
-                return View(movimentoView);
+
+                _logger.Warn("Create [FIM]|resultado: {0}", resultado);
             }
+
+            return RedirectToAction("Create");
+        }
+
+        [HttpGet]
+        public PartialViewResult ListarMovimentosProduto()
+        {
+            _logger.Info("ListarMovimentosProduto [INICIO]");
+            IEnumerable<MovimentoProdutoView> movimentosProduto = null;
+
+            ICollection<MovimentoProduto> movimentos = _movimentoServico.ListarMovimentosProduto();
+
+            if(movimentos != null) {
+                movimentosProduto = 
+                    _mapper.Map<ICollection<MovimentoProduto>, IEnumerable<MovimentoProdutoView>>(movimentos);
+            }
+            else
+            {
+                movimentosProduto = Enumerable.Empty<MovimentoProdutoView>();
+                ViewBag.Alerta = "Erro ao listar MovimentoProduto.";
+                _logger.Warn("ListarMovimentosProduto");
+            }
+
+            _logger.Info("ListarMovimentosProduto [FIM]");
+            return PartialView(movimentosProduto);
         }
 
         [HttpGet]
         public JsonResult GetCosifs(int codigoProduto)
         {
-            _logger.Info($"GetCosifs [INICIO]|codigoProduto: {codigoProduto}");
+            _logger.Info("GetCosifs [INICIO]|codigoProduto: {0}", codigoProduto);
 
-            IEnumerable<CosifResponse> cosifs = _cosifServico.ListarAtivoPorProduto(codigoProduto);
+            ICollection<Cosif> cosifs = _cosifServico.ListarAtivoPorProduto(codigoProduto);
 
-            var cosifsList = new SelectList(
-                cosifs.Select(x => new
-                {
-                    x.Codigo,
-                    Descricao = $"{x.Codigo} - ({x.Classificacao})"
-                }),
-                "Codigo",
-                "Descricao"
-                );
+            if (cosifs != null)
+            {
+                var cosifsList = new SelectList(
+                    cosifs.Select(x => new
+                    {
+                        x.Codigo,
+                        Descricao = $"{x.Codigo} - ({x.Classificacao})"
+                    }),
+                    "Codigo",
+                    "Descricao"
+                    );
 
-            cosifs = null;
+                cosifs = null;
 
-            _logger.Info("GetCosifs [FIM]");
-            return Json(cosifsList, JsonRequestBehavior.AllowGet);
+                _logger.Info("GetCosifs [FIM]");
+                return Json(cosifsList, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                _logger.Warn("GetCosifs [FIM]");
+                return Json(null, JsonRequestBehavior.DenyGet);
+            }
         }
 
         private void ListarProduto()
         {
             _logger.Info("ListarProduto [INICIO]");
 
-            IEnumerable<ProdutoResponse> produtos = _produtoServico.ListarAtivo();
+            ICollection<Produto> produtos = _produtoServico.ListarAtivo();
 
-            ViewBag.Produtos = new SelectList(
-                produtos.OrderBy(x => x.Descricao),
-                "Codigo",
-                "Descricao"
-                );
+            if (produtos != null)
+            {
+                ViewBag.Produtos = new SelectList(
+                    produtos.OrderBy(x => x.Descricao),
+                    "Codigo",
+                    "Descricao"
+                    );
 
-            produtos = null;
+                produtos = null;
+            }
+            else
+            {
+                ViewBag.Alerta = "Erro ao listar produtos.";
+                _logger.Warn("ListarProduto");
+            }
 
             _logger.Info("ListarProduto [FIM]");
         }

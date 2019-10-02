@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Exame.Web.Models.MovimentoProdutoView>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Mes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ano)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoProduto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescricaoProduto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroLancamento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DescricaoMovimento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Valor)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ano)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodigoProduto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DescricaoProduto)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroLancamento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DescricaoMovimento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Valor)
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,4 +1,4 @@
-using Exame.BO.Mappers;
+using Exame.IoC;
 using Exame.Web.App_Start;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -16,7 +16,6 @@ namespace Exame.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AutoMapperConfig.RegisterMappings();
-            AutoMapperServiceConfig.RegisterMappings();
         }
     }
 }

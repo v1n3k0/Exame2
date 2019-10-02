@@ -1,9 +1,7 @@
-﻿using AutoMapper;
-using Exame.BO.Mappers;
+﻿using Exame.BO.Interface.Servico;
+using Exame.DAO.Interface.Repositorio;
+using Exame.Help.Extensao;
 using Exame.VO;
-using Exame.VO.Argumento.Produto;
-using Exame.VO.Interface.Repositorio;
-using Exame.VO.Interface.Servico;
 using System.Collections.Generic;
 
 namespace Exame.BO.Servico
@@ -11,28 +9,22 @@ namespace Exame.BO.Servico
     public class ProdutoServico : IProdutoServico
     {
         private readonly IProdutoRepositorio _repoProduto;
-        private readonly IMapper _mapper;
         private static readonly NLog.Logger _logger = NLog.LogManager.GetCurrentClassLogger();
 
-        public ProdutoServico(IProdutoRepositorio produtoRepositorio)
-        {
-            _repoProduto = produtoRepositorio;
-            _mapper = AutoMapperServiceConfig.Mapper;
-        }
+        public ProdutoServico(IProdutoRepositorio produtoRepositorio) => _repoProduto = produtoRepositorio;
 
         /// <summary>
         /// Listar Produto pelo status ativo
         /// </summary>
-        /// <returns></returns>
-        public IEnumerable<ProdutoResponse> ListarAtivo()
+        /// <returns>Lista de Produto</returns>
+        public ICollection<Produto> ListarAtivo()
         {
             _logger.Info("ListarAtivo [INICIO]");
 
-            IEnumerable<Produto> produtos = _repoProduto.ListarPorStatus("A");
-            IEnumerable<ProdutoResponse> produtosResponse = _mapper.Map<IEnumerable<ProdutoResponse>>(produtos);
+            ICollection<Produto> produtos = _repoProduto.ListarPorStatus("A");
 
-            _logger.Info("ListarAtivo [FIM]");
-            return produtosResponse;
+            _logger.Info("ListarAtivo [FIM]| produtosResponse: {0}", produtos.SerializarXML());
+            return produtos;
         }
     }
 }

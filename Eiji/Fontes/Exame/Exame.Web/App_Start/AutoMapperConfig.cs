@@ -3,7 +3,7 @@ using Exame.Web.Mappers;
 
 namespace Exame.Web.App_Start
 {
-    public sealed class AutoMapperConfig
+    public static class AutoMapperConfig
     {
         public static IMapper Mapper { get; private set; }
 

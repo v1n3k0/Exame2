@@ -1,24 +1,23 @@
-﻿namespace Exame.VO.Entidade.Procedure
+﻿using System.Runtime.Serialization;
+
+namespace Exame.VO.Entidade.Procedure
 {
+    [DataContract]
     public class MovimentoProduto
     {
-        public int Mes { get; private set; }
-        public int Ano { get; private set; }
-        public int CodigoProduto { get; private set; }
-        public string DescricaoProduto { get; private set; }
-        public int NumeroLancamento { get; private set; }
-        public string DescricaoMovimento { get; private set; }
-        public int Valor { get; private set; }
-
-        public MovimentoProduto(int mes, int ano, int codigoProduto, string descricaoProduto, int numeroLancamento, string descricaoMovimento, int valor)
-        {
-            Mes = mes;
-            Ano = ano;
-            CodigoProduto = codigoProduto;
-            DescricaoProduto = descricaoProduto;
-            NumeroLancamento = numeroLancamento;
-            DescricaoMovimento = descricaoMovimento;
-            Valor = valor;
-        }
+        [DataMember]
+        public int Mes { get; set; }
+        [DataMember]
+        public int Ano { get; set; }
+        [DataMember]
+        public int CodigoProduto { get; set; }
+        [DataMember]
+        public string DescricaoProduto { get; set; }
+        [DataMember]
+        public int NumeroLancamento { get; set; }
+        [DataMember]
+        public string DescricaoMovimento { get; set; }
+        [DataMember]
+        public int Valor { get; set; }
     }
 }

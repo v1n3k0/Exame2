@@ -1,25 +1,17 @@
-﻿namespace Exame.VO
+﻿using System.Runtime.Serialization;
+
+namespace Exame.VO
 {
+    [DataContract]
     public class Cosif
     {
-        public int Codigo { get; private set; }
-        public int CodigoProduto { get; private set; }
-        public string Classificacao { get; private set; }
-        public string Status { get; private set; }
-
-        public Cosif(int codigo, int codigoProduto, string classificacao, string status)
-        {
-            Codigo = codigo;
-            CodigoProduto = codigoProduto;
-            Classificacao = classificacao;
-            Status = status;
-        }
-
-        public Cosif(int codigo, int codigoProduto, string status)
-        {
-            Codigo = codigo;
-            CodigoProduto = codigoProduto;
-            Status = status;
-        }
+        [DataMember]
+        public int Codigo { get; set; }
+        [DataMember]
+        public int CodigoProduto { get; set; }
+        [DataMember]
+        public string Classificacao { get; set; }
+        [DataMember]
+        public string Status { get; set; }
     }
 }

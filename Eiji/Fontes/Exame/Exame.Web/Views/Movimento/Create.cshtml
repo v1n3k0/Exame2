@@ -12,69 +12,71 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+    <div class="">
         <h4>Movimento</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Mes, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Mes, new { htmlAttributes = new { @class = "form-control" } })
+
+        <div class="row">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.Mes, htmlAttributes: new { @class = "" })
+                @Html.EditorFor(model => model.Mes, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                 @Html.ValidationMessageFor(model => model.Mes, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ano, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ano, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.Ano, htmlAttributes: new { @class = "" })
+                @Html.EditorFor(model => model.Ano, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                 @Html.ValidationMessageFor(model => model.Ano, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CodigoProduto, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CodigoProduto, (SelectList)ViewBag.Produtos, "Selecione um Produto", new { @class = "form-control" })
+        <div class="row">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.CodigoProduto, htmlAttributes: new { @class = "" })
+                @Html.DropDownListFor(model => model.CodigoProduto, (SelectList)ViewBag.Produtos, "Selecione um Produto", new { @class = "form-control", @disabled = "disabled" })
                 @Html.ValidationMessageFor(model => model.CodigoProduto, "", new { @class = "text-danger" })
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CodigoCosif, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.CodigoCosif, new SelectList(Enumerable.Empty<SelectListItem>()), "Selecione um produto primeiro", new { @class = "form-control" })
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.CodigoCosif, htmlAttributes: new { @class = "" })
+                @Html.DropDownListFor(model => model.CodigoCosif, new SelectList(Enumerable.Empty<SelectListItem>()), "Selecione um produto primeiro", new { @class = "form-control", @disabled = "disabled" })
                 @Html.ValidationMessageFor(model => model.CodigoCosif, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.Valor, htmlAttributes: new { @class = "" })
+                @Html.EditorFor(model => model.Valor, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
                 @Html.ValidationMessageFor(model => model.Valor, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "" })
+                @Html.TextAreaFor(model => model.Descricao, new { @class = "form-control", @row = "3", @disabled = "disabled" })
                 @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Incluir" class="btn btn-default" />
-                <input type="button" value="Limpar" class="btn btn-default" id="limpar" />
+        <br />
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <input type="button" value="Limpar" class="btn btn-default" id="limpar" disabled="disabled"/>
+                <input type="button" value="Novo" class="btn btn-default" id="novo" />
+                <input type="submit" value="Incluir" class="btn btn-default" id="incluir" disabled="disabled"/>
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Voltar para lista", "Index")
+<br />
+
+<div id="ListarMovimentosProduto">
+    @{
+        Html.RenderAction("ListarMovimentosProduto");
+    }
 </div>
 
 @section Scripts {
@@ -84,16 +86,13 @@
         $('#CodigoProduto').change(function () {
             var produto = $('#CodigoProduto');
             var cosif = $('#CodigoCosif');
+
             if (produto.val() != "") {
                 $.ajax({
                     url: "@Url.Action("getCosifs","Movimento")",
                     data: { "codigoProduto": produto.val() },
                     dataType: "json",
                     type: "GET",
-                    error: function () {
-                        alert("Ocorreu um erro");
-                        cosif.empty();
-                    },
                     success: function (data) {
                         cosif.empty();
 
@@ -101,12 +100,27 @@
                             var option = '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
                             cosif.append(option);
                         });
+                    },
+                    error: function () {
+                        alert("Ocorreu um erro ao listar Cosif");
+                        cosif.empty();
                     }
                 });
             } else {
                 alert("Selecione um produto");
                 cosif.val("");
             }
+        });
+
+        $('#novo').click(function () {
+            $('#Mes').prop("disabled", false);
+            $('#Ano').prop("disabled", false);
+            $('#CodigoProduto').prop("disabled", false);
+            $('#CodigoCosif').prop("disabled", false);
+            $('#Valor').prop("disabled", false);
+            $('#Descricao').prop("disabled", false);
+            $('#limpar').prop("disabled", false);
+            $('#incluir').prop("disabled", false);
         });
 
         $('#limpar').click(function () {

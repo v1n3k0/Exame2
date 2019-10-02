@@ -38,9 +38,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.IO.Compression" />
-    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,8 +47,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Banco\Conexao.cs" />
+    <Compile Include="Interface\Repositorio\Base\IListaRepositorio.cs" />
+    <Compile Include="Interface\Repositorio\IMovimentoProdutoRepositorio.cs" />
+    <Compile Include="Interface\Repositorio\Base\IBaseRepositorio.cs" />
+    <Compile Include="Interface\Repositorio\ICosifRepositorio.cs" />
+    <Compile Include="Interface\Repositorio\IMovimentoRepositorio.cs" />
+    <Compile Include="Interface\Repositorio\IProdutoRepositorio.cs" />
+    <Compile Include="Repositorio\Base\BaseRepositorio.cs" />
+    <Compile Include="Repositorio\Base\ListaRepositorio.cs" />
     <Compile Include="Repositorio\CosifRepositorio.cs" />
+    <Compile Include="Repositorio\MovimentoProdutoRepositorio.cs" />
     <Compile Include="Repositorio\MovimentoRepositorio.cs" />
     <Compile Include="Repositorio\ProdutoRepositorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

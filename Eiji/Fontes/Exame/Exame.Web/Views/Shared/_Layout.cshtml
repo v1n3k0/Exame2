@@ -17,11 +17,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Exame", "Index", "Movimento", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Exame", "Create", "Movimento", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Início", "Index", "Movimento")</li>
+                    <li>@Html.ActionLink("Início", "Create", "Movimento")</li>
                 </ul>
             </div>
         </div>
@@ -29,7 +29,7 @@
     <div class="container body-content">
         <div class="row">
             @if(ViewBag.Alerta != null) {
-                <p class="alert alert-danger" role="alert">@ViewBag.Alerta</p>
+                <p class="alert alert-danger" role="alert" id="ViewBagAlert">@ViewBag.Alerta</p>
             }
         </div>        
 
