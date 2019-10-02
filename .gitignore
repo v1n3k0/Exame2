@@ -99,3 +99,16 @@ Eiji/Fontes/Exame/Exame.Web/bin/SimpleInjector.Integration.Web.Mvc.xml
 Eiji/Fontes/Exame/Exame.Web/bin/SimpleInjector.Integration.Web.xml
 Eiji/Fontes/Exame/Exame.Web/bin/SimpleInjector.xml
 /Eiji/Fontes/Exame/Exame.App/bin
+/Eiji/Fontes/Exame/.vs/Exame/v15/Server/sqlite3/*.lock
+/Eiji/Fontes/Exame/.vs/Exame/v15/Server/sqlite3/*.ide
+/Eiji/Fontes/Exame/.vs/Exame/v15/Server/sqlite3/*.ide-shm
+/Eiji/Fontes/Exame/.vs/Exame/v15/Server/sqlite3/*.ide-wal
+/Eiji/Fontes/Exame/Exame.Help/obj/Debug/*.txt
+/Eiji/Fontes/Exame/packages/Antlr.3.5.0.2/*.p7s
+/Eiji/Fontes/Exame/packages/Antlr.3.5.0.2/*.nupkg
+/Eiji/Fontes/Exame/packages/AutoMapper.8.1.1/*.p7s
+/Eiji/Fontes/Exame/packages/AutoMapper.8.1.1/*.nupkg
+/Eiji/Fontes/Exame/packages/Microsoft.AspNet.Mvc.5.2.7/Content/*.xdt
+/Eiji/Fontes/Exame/packages/Microsoft.AspNet.WebPages.3.2.7/Content/*.xdt
+/Eiji/Fontes/Exame/packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0/build/net45/*.props
+/Eiji/Fontes/Exame/packages/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0/content/net45/*.xdt
